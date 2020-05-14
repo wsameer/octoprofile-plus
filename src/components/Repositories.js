@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import RepoCard from './RepoCard';
+import RepoCard from './repocard/RepoCard';
 import Button from 'react-bootstrap/Button';
 import { Row, Col } from 'react-bootstrap';
 
@@ -23,7 +23,7 @@ const Repositories = ({ repoData }) => {
   }
 
   return (
-    <Row className="repositories pt-4 m-2">
+    <Row className="repositories pt-4">
       {repoData.length > 0
         ? repoData.slice(0, itemsPerPage).map((e, i) => (<RepoCard key={i} repo={e} />))
         : <p>No repositories.</p>

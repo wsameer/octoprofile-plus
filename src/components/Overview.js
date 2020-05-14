@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Card } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Card,
+  ButtonToolbar,
+  Button,
+  ButtonGroup,
+  InputGroup,
+  FormControl
+} from 'react-bootstrap';
 import RepoFooter from './repocard/RepoFooter';
+import Topics from './repocard/Topics';
 
 const Overview = ({ repoData }) => {
   const sortTypes = ['stars', 'forks', 'size'];
+  const viewTypes = ['grid', 'list'];
   const LIMIT = 9;
 
   // hooks
   const [sortType, setSortType] = useState(sortTypes[0]);
   const [topRepos, setTopRepos] = useState([]);
+  const [viewType, setViewType] = useState(viewTypes[0]);
 
   const sortRepos = (type) => {
     if (!repoData || repoData.length === 0) {
@@ -27,7 +39,6 @@ const Overview = ({ repoData }) => {
       .filter(repo => !repo.fork || !repo.description)
       .sort((a, b) => b[sortBy] - a[sortBy])
       .slice(0, LIMIT);
-    console.log(sortedData);
     setTopRepos(sortedData);
   };
 
@@ -41,15 +52,45 @@ const Overview = ({ repoData }) => {
   }
 
   return (
-    <Row className="repositories pt-4 m-2">
+    <Row className="repositories pt-4">
       <Col sm={12} className="mb-3">
-        <h5>Top Repositories</h5>
+        <h5 className="mt-1 float-left">Top Repositories {viewType}</h5>
+
+        {/* Filters */}
+        <ButtonToolbar 
+          className="filters float-right mb-3" 
+          aria-label="Filter controls for the repos">
+          <ButtonToolbar aria-label="Filter controls for the repos">
+            <ButtonGroup aria-label="view as group" className="">
+              <Button variant="secondary"
+                className={viewType === viewTypes[1] ? 'active' : ''}
+                onClick={() => setViewType(viewTypes[1])}>
+                <i className="fa fa-list-ul" aria-hidden="true"></i>
+              </Button>
+              <Button variant="secondary"
+                className={viewType === viewTypes[0] ? 'active' : ''}
+                onClick={() => setViewType(viewTypes[0])}>
+                <i className="fa fa-th" aria-hidden="true"></i>
+              </Button>
+            </ButtonGroup>
+          </ButtonToolbar>
+          <InputGroup className="pl-4">
+            <FormControl
+              type="text"
+              placeholder="Input group example"
+              aria-label="Input group example"
+              aria-describedby="btnGroupAddon"
+            />
+          </InputGroup>
+        </ButtonToolbar>
       </Col>
 
       {topRepos.length === 0
         ? <p>No repositories.</p>
         : topRepos.map((repo, i) => (
-          <Col sm={4} key={i} className="pl-3 pr-1 mb-4">
+          <Col
+            sm={viewType === viewTypes[0] ? 4 : 12} key={i}
+            className="pl-3 pr-1 mb-4">
             <Card>
               <Card.Body>
                 <Card.Title>
@@ -61,7 +102,11 @@ const Overview = ({ repoData }) => {
                     {repo.name}
                   </a>
                 </Card.Title>
-                <Card.Text className="text-semi-muted repo-desc height-50">{repo.description}</Card.Text>
+                <Card.Text
+                  className={`text-semi-muted repo-desc ${viewType === viewTypes[0] ? 'height-50' : ''}`}>
+                  {repo.description}
+                </Card.Text>
+                {(repo.topics && viewType === viewTypes[1]) && <Topics topics={repo.topics} />}
               </Card.Body>
               <Card.Footer>
                 <RepoFooter

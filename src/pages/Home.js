@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
-import Sidenav from '../components/Sidenav';
+import Sidenav from '../components/shared/Sidenav';
 import Repositories from '../components/Repositories';
 import Analytics from '../components/Analytics';
 import { mockUserData } from '../utils/mockdata';

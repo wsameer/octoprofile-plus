@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup } from 'react-bootstrap';
 
-import { formatDate } from '../utils/commonfunctions';
+import { formatDate } from '../../utils/commonfunctions';
 
 const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
   return (

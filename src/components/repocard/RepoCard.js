@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
-import RepoFooter from './repocard/RepoFooter';
-import Topics from './repocard/Topics';
+import RepoFooter from './RepoFooter';
+import Topics from './Topics';
 
 const RepoCard = ({ repo }) => {
   return (

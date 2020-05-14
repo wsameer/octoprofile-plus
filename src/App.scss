@@ -264,11 +264,24 @@ a {
       }
     }
 
-    .tab-content {
-      // background-color: $black-russian;
-    }
-
+    /* also overviews */
     .repositories {
+      margin: 20px;
+
+      @include lg {
+        margin: 10px 25px 10px 15px;
+      }
+
+      .filters {
+        .btn-secondary.active {
+          background-color: $jade;
+          border: 1px solid $jade;
+        }
+        .btn-secondary {
+          background-color: transparent;
+        }
+      }
+
       .card {
         background-color: $primary-color;
         color           : $white;
@@ -355,7 +368,13 @@ a {
       }
     }
 
-    .analytics {}
+    .analytics {
+      margin: 20px;
+
+      @include lg {
+        margin: 10px 25px 10px 15px;
+      }
+    }
   }
 
 }

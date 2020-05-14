@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import brandLogo from '../github-plus.png';
+import brandLogo from '../../github-plus.png';
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Branding = ({ hireable }) => {
@@ -23,9 +23,7 @@ const Branding = ({ hireable }) => {
             {hireable ? <span>Open for hire</span> : <span>Not hireable</span>}
           </Tooltip>
         }>
-        <div className="hireable float-right">
-          {hire}
-        </div>
+        <div className="hireable float-right">{hire}</div>
       </OverlayTrigger>
     </div>
   )

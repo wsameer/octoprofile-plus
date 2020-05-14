@@ -5,7 +5,7 @@ import './App.scss';
 
 const Home = (lazy(() => import('./pages/Home')));
 const Start = (lazy(() => import('./pages/Start')));
-const BusyIndicator = (lazy(() => import('./components/BusyIndicator')));
+const BusyIndicator = (lazy(() => import('./components/shared/BusyIndicator')));
 
 const routes = [{
   path: '/',
