@@ -1,4 +1,4 @@
-#Octoprofile-plus
+Octoprofile-plus
 
 A nicer look at your GitHub Profile! With themes, charts and React!
 
