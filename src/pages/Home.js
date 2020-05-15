@@ -10,55 +10,92 @@ import Overview from '../components/Overview';
 
 const Home = (props) => {
   const history = useHistory();
-  const LIMIT = 60;
+  const LIMIT = 100;
   const userName = props.location.state.id;
+  const languageMap = new Map();
 
   // hooks
+  const [languageStats, setLanguageStats] = useState(languageMap);
   const [userData, setUserData] = useState(null);
   // const [error, setError] = useState({});
   const [repoData, setRepoData] = useState(null);
 
-  // async function fetchRepoData() {
-  //   const url = `https://api.github.com/users/${userName}/repos?per_page=${LIMIT}`;
-  //   const response = await fetch(url, {
-  //     headers: new Headers({
-  //       'Accept': 'application/vnd.github.mercy-preview+json'
-  //     })
+  // TODO: For future 
+  // const mapTopics = new Map();
+  // const calculateTopicStats = (repo) => {
+  //   repo.forEach(element => {
+  //     // check if key exists in map
+  //     if (mapTopics.get(element)) {
+  //       mapTopics.set(element, mapTopics.get(element) + 1);
+  //     } else {
+  //       mapTopics.set(element, 1)
+  //     }
   //   });
-  //   response
-  //     .json()
-  //     .then(res => {
-  //       setRepoData(res);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+  //   // console.log(mapTopics);
+  // };
 
-  // async function fetchUserData() {
-  //   const response = await fetch(`https://api.github.com/users/${userName}`);
-  //   response
-  //     .json()
-  //     .then(res => {
-  //       console.log(res);
-  //       setUserData(res);
-  //       fetchRepoData();
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+  const calculateLanguageStats = (repo) => {
+    if (!repo) {
+      return false;
+    }
+
+    return languageMap.get(repo)
+      ? languageMap.set(repo, languageMap.get(repo) + 1)
+      : languageMap.set(repo, 1);
+  };
+
+  async function fetchRepoData() {
+    const url = `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`;
+    const response = await fetch(url, {
+      headers: new Headers({
+        'Accept': 'application/vnd.github.mercy-preview+json'
+      })
+    });
+    response
+      .json()
+      .then((repos) => {
+        setRepoData(repos);
+        for (let index = 0; index < repos.length; index++) {
+          const repo = repos[index];
+          if (repo.language) {
+            console.log(repo.language);
+            setLanguageStats(calculateLanguageStats(repo.language));
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async function fetchUserData() {
+    const response = await fetch(`https://api.github.com/users/${userName}`);
+    response
+      .json()
+      .then(res => {
+        console.log(res);
+        setUserData(res);
+        fetchRepoData();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   useEffect(() => {
     if (userName === '') {
       history.push('/');
     } else {
       // get data
-      // fetchUserData();
+      fetchUserData();
 
       // mocks
-      setUserData(mockUserData);
-      setRepoData(mockRepoData);
+      // for (let index = 0; index < mockRepoData.length; index++) {
+      //   const repo = mockRepoData[index];
+      //   setLanguageStats(calculateLanguageStats(repo.language));
+      // }
+      // setUserData(mockUserData);
+      // setRepoData(mockRepoData);
     }
   }, []);
 
@@ -81,9 +118,7 @@ const Home = (props) => {
               <Repositories repoData={repoData} />
             </Tab>
             <Tab eventKey="analytics" title="Analytics">
-              <Row className="analytics mt-4 m-2">
-                <Analytics />
-              </Row>
+              <Analytics languageStats={languageStats} />
             </Tab>
           </Tabs>
         </Row>

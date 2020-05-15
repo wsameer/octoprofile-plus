@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Row,
-  Col,
-  Card,
-  ButtonToolbar,
-  Button,
-  ButtonGroup,
-  InputGroup,
-  FormControl
-} from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import RepoFooter from './repocard/RepoFooter';
 import Topics from './repocard/Topics';
+import Filters from './shared/Filters';
+import { relativeTimeConvertor } from '../utils/commonfunctions';
+import RepoDesc from './repocard/RepoDesc';
 
 const Overview = ({ repoData }) => {
   const sortTypes = ['stars', 'forks', 'size'];
@@ -39,8 +33,13 @@ const Overview = ({ repoData }) => {
       .filter(repo => !repo.fork || !repo.description)
       .sort((a, b) => b[sortBy] - a[sortBy])
       .slice(0, LIMIT);
+
+    // console.log(sortedData);
     setTopRepos(sortedData);
   };
+
+  const changeViewType = (value) => setViewType(value || viewTypes[0]);
+  const changeSortType = (value) => setSortType(value || sortTypes[0]);
 
   useEffect(() => {
     sortRepos(sortType);
@@ -54,43 +53,28 @@ const Overview = ({ repoData }) => {
   return (
     <Row className="repositories pt-4">
       <Col sm={12} className="mb-3">
-        <h5 className="mt-1 float-left">Top Repositories {viewType}</h5>
+        <h5 className="mt-1 float-left d-none d-md-block">Top Repositories</h5>
+        <h5 className="mb-3 d-block d-md-none text-center">Top Repositories</h5>
 
         {/* Filters */}
-        <ButtonToolbar 
-          className="filters float-right mb-3" 
-          aria-label="Filter controls for the repos">
-          <ButtonToolbar aria-label="Filter controls for the repos">
-            <ButtonGroup aria-label="view as group" className="">
-              <Button variant="secondary"
-                className={viewType === viewTypes[1] ? 'active' : ''}
-                onClick={() => setViewType(viewTypes[1])}>
-                <i className="fa fa-list-ul" aria-hidden="true"></i>
-              </Button>
-              <Button variant="secondary"
-                className={viewType === viewTypes[0] ? 'active' : ''}
-                onClick={() => setViewType(viewTypes[0])}>
-                <i className="fa fa-th" aria-hidden="true"></i>
-              </Button>
-            </ButtonGroup>
-          </ButtonToolbar>
-          <InputGroup className="pl-4">
-            <FormControl
-              type="text"
-              placeholder="Input group example"
-              aria-label="Input group example"
-              aria-describedby="btnGroupAddon"
-            />
-          </InputGroup>
-        </ButtonToolbar>
+        <Filters
+          sortTypes={sortTypes}
+          viewTypes={viewTypes}
+          sortType={sortType}
+          viewType={viewType}
+          changeSortType={changeSortType}
+          changeViewType={changeViewType}
+        />
       </Col>
 
       {topRepos.length === 0
         ? <p>No repositories.</p>
         : topRepos.map((repo, i) => (
           <Col
-            sm={viewType === viewTypes[0] ? 4 : 12} key={i}
-            className="pl-3 pr-1 mb-4">
+            sm={viewType === viewTypes[0] ? 4 : 12}
+            xs={viewType === viewTypes[0] ? 6 : 12}
+            key={i}
+            className="mb-4">
             <Card>
               <Card.Body>
                 <Card.Title>
@@ -101,15 +85,19 @@ const Overview = ({ repoData }) => {
                     rel="noopener noreferrer">
                     {repo.name}
                   </a>
+                  {viewType === viewTypes[1] &&
+                    <small className="float-right">Updated {relativeTimeConvertor(repo.updated_at)}</small>}
                 </Card.Title>
                 <Card.Text
+                  title={repo.description}
                   className={`text-semi-muted repo-desc ${viewType === viewTypes[0] ? 'height-50' : ''}`}>
-                  {repo.description}
+                  <RepoDesc description={repo.description} viewType={viewType} />
                 </Card.Text>
                 {(repo.topics && viewType === viewTypes[1]) && <Topics topics={repo.topics} />}
               </Card.Body>
               <Card.Footer>
                 <RepoFooter
+                  viewType={viewType}
                   size={repo.size}
                   stargazersCount={repo.stargazers_count}
                   language={repo.language}

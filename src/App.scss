@@ -74,6 +74,15 @@ code {
     monospace;
 }
 
+.btn {
+  outline: none;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
 .btn-primary {
   background-color: $black-russian !important;
   border-color    : $jade !important;
@@ -264,9 +273,13 @@ a {
       }
     }
 
+    .tab-content {
+      width: 100%;
+    }
+
     /* also overviews */
     .repositories {
-      margin: 20px;
+      margin: 10px;
 
       @include lg {
         margin: 10px 25px 10px 15px;
@@ -275,10 +288,28 @@ a {
       .filters {
         .btn-secondary.active {
           background-color: $jade;
-          border: 1px solid $jade;
+          border          : 1px solid $jade;
+          box-shadow      : none;
         }
+
         .btn-secondary {
           background-color: transparent;
+          box-shadow      : none;
+        }
+
+        .dropdown-menu {
+          background-color: $black-russian;
+
+          .dropdown-item {
+            color      : $white;
+            font-weight: 100;
+
+            &:hover {
+              background-color: $black-russian;
+              color           : $white;
+              font-weight     : 400;
+            }
+          }
         }
       }
 
