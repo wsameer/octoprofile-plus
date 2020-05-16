@@ -1,25 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Table } from 'react-bootstrap';
+import { Row, Col, Table } from "react-bootstrap";
 import PieChart from './charts/PieChart';
 
-const Analytics = ({ languageStats }) => {
+const Analytics = ({ repoData }) => {
+  // hooks
   const [analyticsData, setAnalyticsData] = useState([]);
 
-  const convertMapToArray = () => {
-    [...languageStats]
+  const convertMapToArray = (data) => {
+    [...data]
       .sort((a, b) => b[1] - a[1])
       .forEach(([key, value]) => {
-        console.log(key + ' = ' + value);
         let objectToAdd = { key, value };
         setAnalyticsData(analyticsData => [...analyticsData, objectToAdd]);
       });
   }
 
+  const extractLanguages = () => {
+    const languageMap = new Map();
+    for (let index = 0; index < repoData.length; index++) {
+      const repo = repoData[index];
+      if (repo.language) {
+        languageMap.get(repo.language)
+          ? languageMap.set(repo.language, languageMap.get(repo.language) + 1)
+          : languageMap.set(repo.language, 1)
+      }
+    }
+    return languageMap;
+  }
+
   useEffect(() => {
-    console.log(languageStats);
-    convertMapToArray();
-  }, [])
+    convertMapToArray(extractLanguages());
+  }, [!analyticsData]);
 
   return (
     <Row className="analytics pt-4">
@@ -28,20 +40,23 @@ const Analytics = ({ languageStats }) => {
         {analyticsData.length && (
           <Table bordered hover variant="dark">
             <thead>
-              <tr className="text-center">
+              <tr>
                 <th>#</th>
-                <th>Technology</th>
-                <th>Repo count</th>
+                <th>Technologoy</th>
+                <th>Repositories</th>
               </tr>
             </thead>
             <tbody>
-              {analyticsData.map((lang, index) => (
-                <tr key={index + 1}>
-                  <td>{index + 1}</td>
-                  <td className="text-left">{lang.key}</td>
-                  <td className="text-right pr-3">{lang.value}</td>
-                </tr>
-              ))}
+              {analyticsData.length === 0
+                ? (<tr><td>No data to show</td></tr>)
+                : (analyticsData.map((lang, index) => (
+                    <tr key={index + 1}>
+                      <td>{index + 1}</td>
+                      <td className="text-left">{lang.key}</td>
+                      <td className="text-right pr-3">{lang.value}</td>
+                    </tr>
+                  )))
+              }
             </tbody>
           </Table>
         )}
@@ -54,7 +69,7 @@ const Analytics = ({ languageStats }) => {
 }
 
 Analytics.propTypes = {
-  languageStats: PropTypes.object.isRequired
-};
+  repoData: PropTypes.array.isRequired
+}
 
 export default Analytics

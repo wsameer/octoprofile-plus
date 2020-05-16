@@ -12,37 +12,10 @@ const Home = (props) => {
   const history = useHistory();
   const LIMIT = 100;
   const userName = props.location.state.id;
-  const languageMap = new Map();
 
   // hooks
-  const [languageStats, setLanguageStats] = useState(languageMap);
   const [userData, setUserData] = useState(null);
-  // const [error, setError] = useState({});
   const [repoData, setRepoData] = useState(null);
-
-  // TODO: For future 
-  // const mapTopics = new Map();
-  // const calculateTopicStats = (repo) => {
-  //   repo.forEach(element => {
-  //     // check if key exists in map
-  //     if (mapTopics.get(element)) {
-  //       mapTopics.set(element, mapTopics.get(element) + 1);
-  //     } else {
-  //       mapTopics.set(element, 1)
-  //     }
-  //   });
-  //   // console.log(mapTopics);
-  // };
-
-  const calculateLanguageStats = (repo) => {
-    if (!repo) {
-      return false;
-    }
-
-    return languageMap.get(repo)
-      ? languageMap.set(repo, languageMap.get(repo) + 1)
-      : languageMap.set(repo, 1);
-  };
 
   async function fetchRepoData() {
     const url = `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`;
@@ -55,13 +28,6 @@ const Home = (props) => {
       .json()
       .then((repos) => {
         setRepoData(repos);
-        for (let index = 0; index < repos.length; index++) {
-          const repo = repos[index];
-          if (repo.language) {
-            console.log(repo.language);
-            setLanguageStats(calculateLanguageStats(repo.language));
-          }
-        }
       })
       .catch(err => {
         console.log(err);
@@ -73,9 +39,7 @@ const Home = (props) => {
     response
       .json()
       .then(res => {
-        console.log(res);
         setUserData(res);
-        fetchRepoData();
       })
       .catch(err => {
         console.log(err);
@@ -88,12 +52,9 @@ const Home = (props) => {
     } else {
       // get data
       fetchUserData();
+      fetchRepoData();
 
       // mocks
-      // for (let index = 0; index < mockRepoData.length; index++) {
-      //   const repo = mockRepoData[index];
-      //   setLanguageStats(calculateLanguageStats(repo.language));
-      // }
       // setUserData(mockUserData);
       // setRepoData(mockRepoData);
     }
@@ -118,7 +79,7 @@ const Home = (props) => {
               <Repositories repoData={repoData} />
             </Tab>
             <Tab eventKey="analytics" title="Analytics">
-              <Analytics languageStats={languageStats} />
+              <Analytics repoData={repoData} />
             </Tab>
           </Tabs>
         </Row>
