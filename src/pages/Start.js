@@ -3,7 +3,7 @@ import { Col, Form } from 'react-bootstrap';
 import logo from '../github-plus.png';
 import { useHistory } from 'react-router-dom';
 
-const Start = (props) => {
+const Start = () => {
   const history = useHistory()
   const [userName, setUserName] = useState('');
 

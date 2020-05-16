@@ -30,7 +30,7 @@ const Overview = ({ repoData }) => {
 
     const sortBy = sortMap[type];
     const sortedData = repoData
-      .filter(repo => !repo.fork || !repo.description)
+      .filter(repo => !repo.fork)
       .sort((a, b) => b[sortBy] - a[sortBy])
       .slice(0, LIMIT);
 
@@ -77,6 +77,7 @@ const Overview = ({ repoData }) => {
             className="mb-4">
             <Card>
               <Card.Body>
+
                 <Card.Title>
                   <i className="fa fa-folder-open-o pr-2" aria-hidden="true"></i>
                   <a
@@ -88,13 +89,18 @@ const Overview = ({ repoData }) => {
                   {viewType === viewTypes[1] &&
                     <small className="float-right">Updated {relativeTimeConvertor(repo.updated_at)}</small>}
                 </Card.Title>
-                <Card.Text
-                  title={repo.description}
-                  className={`text-semi-muted repo-desc ${viewType === viewTypes[0] ? 'height-50' : ''}`}>
-                  <RepoDesc description={repo.description} viewType={viewType} />
-                </Card.Text>
+
+                {repo.description && (
+                  <Card.Text
+                    title={repo.description}
+                    className={`text-semi-muted repo-desc ${viewType === viewTypes[0] ? 'height-50' : ''}`}>
+                    <RepoDesc description={repo.description} viewType={viewType} />
+                  </Card.Text>
+                )}
+
                 {(repo.topics && viewType === viewTypes[1]) && <Topics topics={repo.topics} />}
               </Card.Body>
+
               <Card.Footer>
                 <RepoFooter
                   viewType={viewType}

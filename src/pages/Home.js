@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
-import Sidenav from '../components/shared/Sidenav';
-import Repositories from '../components/Repositories';
-import Analytics from '../components/Analytics';
-import { mockUserData } from '../utils/mockdata';
-import { mockRepoData } from '../utils/mockdata';
-import Overview from '../components/Overview';
+import { Repositories, Analytics, Overview, Error } from '../components';
+import { Sidenav, ApiRateLimit } from '../components/shared';
+// import { mockUserData , mockRepoData} from '../utils/mockdata';
+
+const HTTP_HEADERS = {
+  headers: new Headers({
+    'Accept': 'application/vnd.github.mercy-preview+json',
+    'User-Agent': 'octoprofile-plus'
+  })
+};
 
 const Home = (props) => {
   const history = useHistory();
@@ -14,35 +18,62 @@ const Home = (props) => {
   const userName = props.location.state.id;
 
   // hooks
+  const [error, setError] = useState({ active: false, type: 200 });
   const [userData, setUserData] = useState(null);
   const [repoData, setRepoData] = useState(null);
+  const [apiRateLimit, setApiRateLimit] = useState(null);
 
   async function fetchRepoData() {
     const url = `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`;
-    const response = await fetch(url, {
-      headers: new Headers({
-        'Accept': 'application/vnd.github.mercy-preview+json'
-      })
-    });
-    response
-      .json()
-      .then((repos) => {
-        setRepoData(repos);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const response = await fetch(url, HTTP_HEADERS);
+    if (response.status === 404) {
+      setError({ active: true, type: 404 })
+    }
+    if (response.status === 403) {
+      setError({ active: true, type: 403 })
+    }
+    if (response.status === 200) {
+      response
+        .json()
+        .then(res => setRepoData(res))
+        .catch(err => {
+          console.log(err);
+          setError({ active: true, type: 400 })
+        })
+    }
   }
 
-  async function fetchUserData() {
-    const response = await fetch(`https://api.github.com/users/${userName}`);
-    response
+  async function fetchGitHubUser() {
+    const response = await fetch(`https://api.github.com/users/${userName}`, HTTP_HEADERS);
+    if (response.status === 404) {
+      setError({ active: true, type: 404 })
+    }
+    if (response.status === 403) {
+      setError({ active: true, type: 403 })
+    }
+    if (response.status === 200) {
+      response
+        .json()
+        .then(res => setUserData(res))
+        .catch(err => {
+          console.log(err);
+          setError({ active: true, type: 400 })
+        })
+    }
+  }
+
+  async function fetchGitHubApiLimit() {
+    const reponse = await fetch(`https://api.github.com/rate_limit`, HTTP_HEADERS);
+    reponse
       .json()
-      .then(res => {
-        setUserData(res);
+      .then(json => {
+        setApiRateLimit(json.resources.core);
+        if (json.resources.core.remaining < 1) {
+          setError({ active: true, type: 403 });
+        }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        console.log(error);
       });
   }
 
@@ -50,8 +81,13 @@ const Home = (props) => {
     if (userName === '') {
       history.push('/');
     } else {
+
+      if (process.env.NODE_ENV === 'production') {
+        fetchGitHubApiLimit();
+      }
+
       // get data
-      fetchUserData();
+      fetchGitHubUser();
       fetchRepoData();
 
       // mocks
@@ -60,12 +96,21 @@ const Home = (props) => {
     }
   }, []);
 
+  if (error && error.active) {
+    return (
+      <Col sm={12}>
+        <Error error={error} />
+      </Col>
+    );
+  }
+
   if (userData == null || !repoData) {
     return <div>Loading...</div>
   };
 
   return (
     <>
+      {apiRateLimit && <ApiRateLimit apiRateLimit={apiRateLimit} />}
       <Col sm={3} className="sidenav">
         <Sidenav userData={userData} />
       </Col>

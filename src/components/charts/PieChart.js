@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const PieChart = ({ chartData }) => {
-  useEffect(() => {
-    // console.table(chartData);
-  }, []);
+  // useEffect(() => {
+  //   console.table(chartData);
+  // }, []);
 
   return (
     <h3>Coming soon.</h3>

@@ -37,7 +37,7 @@ const Sidenav = (props) => {
       <ListGroup variant="flush" className="sidenav-footer col-sm-12">
         <ListGroup.Item>
           <i className="fa fa-ticket pr-3" aria-hidden="true"></i>
-          <span>Support</span>
+          <a href="mailto:dev.wsameer@gmail.com"><span>Support</span></a>
         </ListGroup.Item>
       </ListGroup>
     </>

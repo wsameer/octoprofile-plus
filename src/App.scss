@@ -98,6 +98,20 @@ a {
   background-color: $black-russian;
   color           : $white;
 
+  .rate-limit {
+
+    display: none;
+
+    @include md {
+      position : absolute;
+      font-size: 11px;
+      display  : block;
+      right    : 20px;
+      z-index  : 1;
+      top      : 10px;
+    }
+  }
+
   .start {
     height: 100%;
     width : 100%;

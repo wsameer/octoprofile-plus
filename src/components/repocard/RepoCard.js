@@ -19,7 +19,7 @@ const RepoCard = ({ repo }) => {
               {repo.name}
             </a>
           </Card.Title>
-          <Card.Text className="text-semi-muted repo-desc">{repo.description}</Card.Text>
+          {repo.description && <Card.Text className="text-semi-muted repo-desc">{repo.description}</Card.Text>}
           {repo.topics && <Topics topics={repo.topics} />}
         </Card.Body>
         <Card.Footer>

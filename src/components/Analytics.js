@@ -31,7 +31,7 @@ const Analytics = ({ repoData }) => {
 
   useEffect(() => {
     convertMapToArray(extractLanguages());
-  }, [!analyticsData]);
+  }, []);
 
   return (
     <Row className="analytics pt-4">
@@ -50,12 +50,12 @@ const Analytics = ({ repoData }) => {
               {analyticsData.length === 0
                 ? (<tr><td>No data to show</td></tr>)
                 : (analyticsData.map((lang, index) => (
-                    <tr key={index + 1}>
-                      <td>{index + 1}</td>
-                      <td className="text-left">{lang.key}</td>
-                      <td className="text-right pr-3">{lang.value}</td>
-                    </tr>
-                  )))
+                  <tr key={index + 1}>
+                    <td>{index + 1}</td>
+                    <td className="text-left">{lang.key}</td>
+                    <td className="text-right pr-3">{lang.value}</td>
+                  </tr>
+                )))
               }
             </tbody>
           </Table>
