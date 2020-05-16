@@ -3,12 +3,13 @@ import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
 import { Repositories, Analytics, Overview, Error } from '../components';
 import { Sidenav, ApiRateLimit } from '../components/shared';
-// import { mockUserData , mockRepoData} from '../utils/mockdata';
+import { mockUserData , mockRepoData} from '../utils/mockdata';
 
 const HTTP_HEADERS = {
   headers: new Headers({
     'Accept': 'application/vnd.github.mercy-preview+json',
-    'User-Agent': 'octoprofile-plus'
+    'User-Agent': 'octoprofile-plus',
+
   })
 };
 
@@ -63,7 +64,7 @@ const Home = (props) => {
   }
 
   async function fetchGitHubApiLimit() {
-    const reponse = await fetch(`https://api.github.com/rate_limit`, HTTP_HEADERS);
+    const reponse = await fetch(`https://api.github.com/rate_limit`);
     reponse
       .json()
       .then(json => {
@@ -82,9 +83,10 @@ const Home = (props) => {
       history.push('/');
     } else {
 
-      if (process.env.NODE_ENV === 'production') {
-        fetchGitHubApiLimit();
-      }
+      // gives errors even in PROD
+      // if (process.env.NODE_ENV === 'production') {
+        // fetchGitHubApiLimit();
+      // }
 
       // get data
       fetchGitHubUser();
