@@ -29,8 +29,12 @@ const Branding = ({ hireable }) => {
   )
 }
 
+Branding.defaultProps = {
+  hireable: false
+};
+
 Branding.propTypes = {
   hireable: PropTypes.bool.isRequired
-}
+};
 
 export default Branding
