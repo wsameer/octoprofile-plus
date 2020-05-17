@@ -4,6 +4,22 @@ A nicer look at your GitHub Profile! With themes, charts and React!
 
 ![octoprofile-plus](./public/octoprofile-plus-dashboard.png)
 
+### Features
+
+- Search any github user or organization
+- View top 10 repositories, and toggle between grid and list view.
+- Sort the repositories based on count of forks, stars, size.
+- Visualization charts showing top language contribution of a user.
+- View all the repositories a user has created or forked.
+
+
+### Build using
+
+- Reactjs
+- React Hooks
+- GitHub API
+- React Bootstrap
+- React Chartjs 2
 
 
 ### Installation
