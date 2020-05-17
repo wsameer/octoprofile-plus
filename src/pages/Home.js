@@ -3,13 +3,12 @@ import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
 import { Repositories, Analytics, Overview, Error } from '../components';
 import { Sidenav, ApiRateLimit } from '../components/shared';
-import { mockUserData , mockRepoData} from '../utils/mockdata';
+// import { mockUserData, mockRepoData } from '../utils/mockdata';
 
 const HTTP_HEADERS = {
   headers: new Headers({
     'Accept': 'application/vnd.github.mercy-preview+json',
-    'User-Agent': 'octoprofile-plus',
-
+    'User-Agent': 'octoprofile-plus'
   })
 };
 
@@ -25,14 +24,10 @@ const Home = (props) => {
   const [apiRateLimit, setApiRateLimit] = useState(null);
 
   async function fetchRepoData() {
-    const url = `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`;
-    const response = await fetch(url, HTTP_HEADERS);
-    if (response.status === 404) {
-      setError({ active: true, type: 404 })
-    }
-    if (response.status === 403) {
-      setError({ active: true, type: 403 })
-    }
+    const response = await fetch(
+      `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`,
+      HTTP_HEADERS
+    );
     if (response.status === 200) {
       response
         .json()
@@ -40,18 +35,15 @@ const Home = (props) => {
         .catch(err => {
           console.log(err);
           setError({ active: true, type: 400 })
-        })
+        });
+    }
+    else {
+      setError({ active: true, type: response.status })
     }
   }
 
   async function fetchGitHubUser() {
     const response = await fetch(`https://api.github.com/users/${userName}`, HTTP_HEADERS);
-    if (response.status === 404) {
-      setError({ active: true, type: 404 })
-    }
-    if (response.status === 403) {
-      setError({ active: true, type: 403 })
-    }
     if (response.status === 200) {
       response
         .json()
@@ -59,7 +51,10 @@ const Home = (props) => {
         .catch(err => {
           console.log(err);
           setError({ active: true, type: 400 })
-        })
+        });
+    }
+    else {
+      setError({ active: true, type: response.status })
     }
   }
 
@@ -83,9 +78,9 @@ const Home = (props) => {
       history.push('/');
     } else {
 
-      // gives errors even in PROD
+      // gives errors even in PROD too
       // if (process.env.NODE_ENV === 'production') {
-        // fetchGitHubApiLimit();
+      // fetchGitHubApiLimit();
       // }
 
       // get data

@@ -35,14 +35,14 @@ const Analytics = ({ repoData }) => {
 
   return (
     <Row className="analytics pt-4">
+      <h5 className="mt-0 mb-4 col-12">Top Technologies</h5>
       <Col sm={6} className="mb-3">
-        <h5 className="mt-1 mb-2">Top Technologies</h5>
         {analyticsData.length && (
           <Table bordered hover variant="dark">
             <thead>
               <tr>
                 <th>#</th>
-                <th>Technologoy</th>
+                <th>Technology</th>
                 <th>Repositories</th>
               </tr>
             </thead>
@@ -61,8 +61,8 @@ const Analytics = ({ repoData }) => {
           </Table>
         )}
       </Col>
-      <Col sm={6} className="mb-3">
-        {analyticsData.length && <PieChart chartData={analyticsData} />}
+      <Col sm={6} className="mb-3 bg-lite-dark">
+        {analyticsData && <PieChart chartData={analyticsData} />}
       </Col>
     </Row>
   )
