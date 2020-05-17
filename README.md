@@ -2,7 +2,7 @@
 
 A nicer look at your GitHub Profile! With themes, charts and React!
 
-![octoprofile-plus](../)
+![octoprofile-plus](./public/octoprofile-plus-dashboard.png)
 
 ### Installation
 1. Install dependencies
