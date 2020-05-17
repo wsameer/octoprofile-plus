@@ -13,7 +13,7 @@ A nicer look at your GitHub Profile! With themes, charts and React!
 - View all the repositories a user has created or forked.
 
 
-### Build using
+### Built using
 
 - Reactjs
 - React Hooks
