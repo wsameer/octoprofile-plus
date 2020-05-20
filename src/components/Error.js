@@ -10,24 +10,25 @@ const Error = ({ error }) => {
         <div className="mt-5 text-center">
           {error.type === 403
             ? (
-              <p>
-                Oh no, you hit the{' '}
+              <p className="pt-5">
+                Oops! We have reached the{' '}
                 <a
                   href="https://developer.github.com/v3/#rate-limiting"
                   target="_blank"
                   rel="noopener noreferrer">
                   rate limit
                 </a>
-                ! Try again later.
+                ! Try again later. ¯\_(ツ)_/¯
               </p>
             )
             : error.type === 404
               ? (
-                <div className="text-center">
-                  <h1>User not found!</h1>
+                <div className="text-center pt-5">
+                  <h1>Sorry!</h1>
+                  <h2>We couldn't find that user.</h2>
                 </div>
               )
-              : (<p>Oh no! Something went wrong. Try again later!</p>)
+              : (<p> :-( Internal Server Error. Please try after some time!</p>)
           }
           <Link to="/">
             <Button variant="success" className="mt-3">Go home</Button>
