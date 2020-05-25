@@ -131,11 +131,20 @@ a {
 
   .sidenav {
     background-color: $primary-color;
-    min-height      : 720px;
+    min-height      : 100%;
     padding         : 1.5rem;
 
     @include lg {
-      padding: 1.25rem 2.25rem;
+      padding   : 1.25rem 2.25rem;
+      min-height: 720px;
+    }
+
+    .collapse {
+      display           : none;
+    }
+
+    .collapse.in {
+      display   : block;
     }
 
     div[class^='col'],

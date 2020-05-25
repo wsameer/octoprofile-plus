@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup } from 'react-bootstrap';
-
 import { formatDate } from '../../utils/commonfunctions';
 
 const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
@@ -15,13 +14,13 @@ const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
         <i className="fa fa-map-marker pr-3" aria-hidden="true"></i>
         <span>{location}</span>
       </ListGroup.Item>
-      {email &&
+      {
+        email &&
         <ListGroup.Item>
           <i className="fa fa-envelope-o pr-3" aria-hidden="true"></i>
           <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">{email}</a>
         </ListGroup.Item>
       }
-
       <ListGroup.Item>
         <i className="fa fa-link pr-3" aria-hidden="true"></i>
         <a href={blog} target="_blank" rel="noopener noreferrer">{blog}</a>
@@ -31,8 +30,8 @@ const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
         <span>{formatDate(createdAt)}</span>
       </ListGroup.Item>
     </ListGroup>
-  )
-}
+  );
+};
 
 PersonalDetails.propTypes = {
   createdAt: PropTypes.string.isRequired,
@@ -40,6 +39,6 @@ PersonalDetails.propTypes = {
   company: PropTypes.string.isRequired,
   blog: PropTypes.string.isRequired,
   email: PropTypes.string,
-}
+};
 
-export default PersonalDetails
+export default PersonalDetails;
