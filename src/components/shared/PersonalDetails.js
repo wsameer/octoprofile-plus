@@ -36,7 +36,7 @@ const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
 PersonalDetails.propTypes = {
   createdAt: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  company: PropTypes.string.isRequired,
+  company: PropTypes.string,
   blog: PropTypes.string.isRequired,
   email: PropTypes.string,
 };
