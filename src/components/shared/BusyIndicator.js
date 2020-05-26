@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 
-const BusyIndicator = () => {
+const BusyIndicator = props => {
   return (
-    <p>I'm loading...</p>
-  )
-}
+    <Spinner animation="border" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
+  );
+};
 
-export default BusyIndicator
+export default BusyIndicator;

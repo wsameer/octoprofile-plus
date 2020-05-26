@@ -94,6 +94,21 @@ a {
   color: $white !important;
 }
 
+.spinner-border {
+  position       : absolute;
+  height         : 60px !important;
+  width          : 60px !important;
+  top            : 50%;
+  left           : 50%;
+  margin-left    : -30px;
+  margin-top     : -50px;
+  background-size: 100%;
+
+  @include md {
+    margin-left: -50px;
+  }
+}
+
 .App {
   background-color: $black-russian;
   color           : $white;
@@ -140,11 +155,11 @@ a {
     }
 
     .collapse {
-      display           : none;
+      display: none;
     }
 
     .collapse.in {
-      display   : block;
+      display: block;
     }
 
     div[class^='col'],

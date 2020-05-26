@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
 import { Repositories, Analytics, Overview, Error } from '../components';
-import { Sidenav, ApiRateLimit } from '../components/shared';
+import { Sidenav, ApiRateLimit, BusyIndicator } from '../components/shared';
 // import { mockUserData, mockRepoData } from '../utils/mockdata';
 
 const HTTP_HEADERS = {
@@ -102,7 +102,7 @@ const Home = (props) => {
   }
 
   if (userData == null || !repoData) {
-    return <div>Loading...</div>
+    return <BusyIndicator />
   };
 
   return (
