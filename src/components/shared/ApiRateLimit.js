@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const ApiRateLimit = ({ apiRateLimit }) => {
   return (
-    <div className="rate-limit text-right">
+    <div className="rate-limit text-center">
       {apiRateLimit && (
         <>
           <span>{`${apiRateLimit.remaining} / ${apiRateLimit.limit}`}</span>
