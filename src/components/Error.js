@@ -36,11 +36,11 @@ const Error = ({ error }) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 Error.propTypes = {
   error: PropTypes.object.isRequired
 };
 
-export default Error
+export default Error;
