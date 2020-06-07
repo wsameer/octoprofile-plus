@@ -7,7 +7,7 @@ const ApiRateLimit = ({ apiRateLimit }) => {
       {apiRateLimit && (
         <>
           <span>{`${apiRateLimit.remaining} / ${apiRateLimit.limit}`}</span>
-          <br />
+          {' '}
           <span>requests left</span>
         </>
       )}
