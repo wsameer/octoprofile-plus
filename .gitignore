@@ -12,6 +12,7 @@
 /build
 
 /src/utils/mockdata.js
+/src/utils/mockdata-2.js
 
 # misc
 .DS_Store

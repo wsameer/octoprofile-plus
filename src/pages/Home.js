@@ -3,12 +3,13 @@ import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
 import { Repositories, Analytics, Overview, Error } from '../components';
 import { Sidenav, ApiRateLimit, BusyIndicator } from '../components/shared';
+
 // import { mockUserData, mockRepoData } from '../utils/mockdata';
+// const mockLimit = { limit: "60", remaining: "47", reset: "1591507162" };
 
 const HTTP_HEADERS = {
   headers: new Headers({
-    'Accept': 'application/vnd.github.mercy-preview+json',
-    'User-Agent': 'octoprofile-plus'
+    'Accept': 'application/vnd.github.mercy-preview+json'
   })
 };
 
@@ -28,10 +29,20 @@ const Home = (props) => {
       `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`,
       HTTP_HEADERS
     );
+
+    // capture headers
+    setApiRateLimit({
+      limit: response.headers.get('X-Ratelimit-Limit'),
+      remaining: response.headers.get('X-Ratelimit-Remaining'),
+      reset: response.headers.get('X-Ratelimit-Reset')
+    });
+
     if (response.status === 200) {
       response
         .json()
-        .then(res => setRepoData(res))
+        .then(res => {
+          setRepoData(res);
+        })
         .catch(err => {
           console.log(err);
           setError({ active: true, type: 400 })
@@ -44,12 +55,19 @@ const Home = (props) => {
 
   async function fetchGitHubUser() {
     const response = await fetch(`https://api.github.com/users/${userName}`, HTTP_HEADERS);
+
+    // capture headers
+    setApiRateLimit({
+      limit: response.headers.get('X-Ratelimit-Limit'),
+      remaining: response.headers.get('X-Ratelimit-Remaining'),
+      reset: response.headers.get('X-Ratelimit-Reset')
+    });
+
     if (response.status === 200) {
       response
         .json()
         .then(res => setUserData(res))
         .catch(err => {
-          console.log(err);
           setError({ active: true, type: 400 })
         });
     }
@@ -58,9 +76,10 @@ const Home = (props) => {
     }
   }
 
+  // Doesn't work due to CORS restrictions :(
   async function fetchGitHubApiLimit() {
-    const reponse = await fetch(`https://api.github.com/rate_limit`);
-    reponse
+    const response = await fetch(`https://api.github.com/rate_limit`, HTTP_HEADERS);
+    response
       .json()
       .then(json => {
         setApiRateLimit(json.resources.core);
@@ -90,6 +109,11 @@ const Home = (props) => {
       // mocks
       // setUserData(mockUserData);
       // setRepoData(mockRepoData);
+      // setApiRateLimit({
+      //   limit: mockLimit.limit,
+      //   remaining: mockLimit.remaining - 2,
+      //   reset: mockLimit.reset
+      // });
     }
   }, []);
 
