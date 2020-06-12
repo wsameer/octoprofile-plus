@@ -77,20 +77,20 @@ const Home = (props) => {
   }
 
   // Doesn't work due to CORS restrictions :(
-  async function fetchGitHubApiLimit() {
-    const response = await fetch(`https://api.github.com/rate_limit`, HTTP_HEADERS);
-    response
-      .json()
-      .then(json => {
-        setApiRateLimit(json.resources.core);
-        if (json.resources.core.remaining < 1) {
-          setError({ active: true, type: 403 });
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  // async function fetchGitHubApiLimit() {
+  //   const response = await fetch(`https://api.github.com/rate_limit`, HTTP_HEADERS);
+  //   response
+  //     .json()
+  //     .then(json => {
+  //       setApiRateLimit(json.resources.core);
+  //       if (json.resources.core.remaining < 1) {
+  //         setError({ active: true, type: 403 });
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   useEffect(() => {
     if (userName === '') {
@@ -106,7 +106,7 @@ const Home = (props) => {
       fetchGitHubUser();
       fetchRepoData();
 
-      // mocks
+      // // mocks
       // setUserData(mockUserData);
       // setRepoData(mockRepoData);
       // setApiRateLimit({
