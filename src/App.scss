@@ -90,6 +90,16 @@ code {
   outline         : none;
 }
 
+.btn-primary:focus {
+  box-shadow: none;
+  outline   : none;
+}
+
+.dropdown-toggle:focus {
+  box-shadow: none !important;
+  outline   : none;
+}
+
 a {
   color: $white !important;
 }
@@ -339,15 +349,24 @@ a {
 
         .dropdown-menu {
           background-color: $black-russian;
+          box-shadow      : 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
           .dropdown-item {
             color      : $white;
             font-weight: 100;
+            font-size  : 14px;
+            opacity    : 0.7;
 
             &:hover {
               background-color: $black-russian;
               color           : $white;
-              font-weight     : 400;
+              opacity         : 1;
+              font-size       : 14px;
+            }
+
+            &:focus {
+              border : none;
+              outline: none;
             }
           }
         }
@@ -413,12 +432,12 @@ a {
         }
 
         .card-footer {
-          font-size: 11px;
+          font-size: 10px;
           padding  : 10px;
 
           @include lg {
             padding  : 1.25rem;
-            font-size: 13px;
+            font-size: 12px;
           }
 
           .repo-language-color {
