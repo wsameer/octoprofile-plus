@@ -9,6 +9,10 @@ export const formatDate = (dt) => {
   return `${da} ${mo} ${ye}`;
 };
 
+/**
+ * Converts date into relative format
+ * @param {string} dateValue The date to be converted
+ */
 export const relativeTimeConvertor = (dateValue) => {
   let current = new Date();
   let previous = new Date(dateValue);
