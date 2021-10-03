@@ -1,75 +1,80 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import { Row, Col, Table } from "react-bootstrap";
-import PieChart from './charts/PieChart';
+import PieChart from "./charts/PieChart";
+import { convertMapToArray } from "../utils/convertMapToArray";
 
 const Analytics = ({ repoData }) => {
-  // hooks
-  const [analyticsData, setAnalyticsData] = useState([]);
+    const [analyticsData, setAnalyticsData] = useState([]),
+        extractLanguages = useCallback(() => {
+            const languageMap = new Map();
+            for (let index = 0; index < repoData.length; index++) {
+                const repo = repoData[index];
+                if (repo.language) {
+                    languageMap.get(repo.language)
+                        ? languageMap.set(
+                              repo.language,
+                              languageMap.get(repo.language) + 1
+                          )
+                        : languageMap.set(repo.language, 1);
+                }
+            }
+            return languageMap;
+        }, [repoData]);
 
-  const convertMapToArray = (data) => {
-    [...data]
-      .sort((a, b) => b[1] - a[1])
-      .forEach(([key, value]) => {
-        let objectToAdd = { key, value };
-        setAnalyticsData(analyticsData => [...analyticsData, objectToAdd]);
-      });
-  }
+    useEffect(() => {
+        const convertedData = convertMapToArray(extractLanguages());
+        console.log(convertedData);
+        setAnalyticsData((analyticsData) => [
+            ...analyticsData,
+            ...convertedData,
+        ]);
+    }, [extractLanguages]);
 
-  const extractLanguages = () => {
-    const languageMap = new Map();
-    for (let index = 0; index < repoData.length; index++) {
-      const repo = repoData[index];
-      if (repo.language) {
-        languageMap.get(repo.language)
-          ? languageMap.set(repo.language, languageMap.get(repo.language) + 1)
-          : languageMap.set(repo.language, 1)
-      }
-    }
-    return languageMap;
-  }
-
-  useEffect(() => {
-    convertMapToArray(extractLanguages());
-  }, []);
-
-  return (
-    <Row className="analytics pt-4">
-      <h5 className="mt-0 mb-4 col-12">Top Technologies</h5>
-      <Col sm={6} className="mb-3">
-        {analyticsData.length && (
-          <Table bordered hover variant="dark">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Technology</th>
-                <th>Repositories</th>
-              </tr>
-            </thead>
-            <tbody>
-              {analyticsData.length === 0
-                ? (<tr><td>No data to show</td></tr>)
-                : (analyticsData.map((lang, index) => (
-                  <tr key={index + 1}>
-                    <td>{index + 1}</td>
-                    <td className="text-left">{lang.key}</td>
-                    <td className="text-right pr-3">{lang.value}</td>
-                  </tr>
-                )))
-              }
-            </tbody>
-          </Table>
-        )}
-      </Col>
-      <Col sm={6} className="mb-3 bg-lite-dark">
-        {analyticsData && <PieChart chartData={analyticsData} />}
-      </Col>
-    </Row>
-  )
-}
+    return (
+        <Row className="analytics pt-4">
+            <h5 className="mt-0 mb-4 col-12">Top Technologies</h5>
+            <Col sm={6} className="mb-3">
+                {analyticsData.length && (
+                    <Table bordered hover variant="dark">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Technology</th>
+                                <th>Repositories</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {analyticsData.length === 0 ? (
+                                <tr>
+                                    <td>No data to show</td>
+                                </tr>
+                            ) : (
+                                analyticsData.map((lang, index) => (
+                                    <tr key={index + 1}>
+                                        <td>{index + 1}</td>
+                                        <td className="text-left">
+                                            {lang.key}
+                                        </td>
+                                        <td className="text-right pr-3">
+                                            {lang.value}
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </Table>
+                )}
+            </Col>
+            <Col sm={6} className="mb-3 bg-lite-dark">
+                {analyticsData && <PieChart chartData={analyticsData} />}
+            </Col>
+        </Row>
+    );
+};
 
 Analytics.propTypes = {
-  repoData: PropTypes.array.isRequired
-}
+    repoData: PropTypes.array.isRequired,
+};
 
-export default Analytics
+export default Analytics;
