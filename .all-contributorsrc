@@ -1,0 +1,42 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Agreon",
+      "name": "Daniel Huth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4455258?v=4",
+      "profile": "http://agreon.de",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "wsameer",
+      "name": "Sameer Waskar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8468992?v=4",
+      "profile": "https://wsameer.github.io/v1/",
+      "contributions": [
+        "code",
+        "content",
+        "data",
+        "bug",
+        "doc",
+        "design",
+        "ideas",
+        "infra",
+        "maintenance",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "octoprofile-plus",
+  "projectOwner": "wsameer",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
