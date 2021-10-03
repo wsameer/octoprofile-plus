@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Col, Row, Tabs, Tab } from 'react-bootstrap';
-import { Repositories, Analytics, Overview, Error } from '../components';
-import { Sidenav, ApiRateLimit, BusyIndicator } from '../components/shared';
+import { Col, Row, Tabs, Tab } from "react-bootstrap";
+import { Repositories, Analytics, Overview, Error } from "../components";
+import { Sidenav, ApiRateLimit, BusyIndicator } from "../components/shared";
 
 // import { mockUserData, mockRepoData } from '../utils/mockdata';
 // const mockLimit = { limit: "60", remaining: "47", reset: "1591507162" };
 
 const HTTP_HEADERS = {
   headers: new Headers({
-    'Accept': 'application/vnd.github.mercy-preview+json'
-  })
+    Accept: "application/vnd.github.mercy-preview+json",
+  }),
 };
 
 const Home = (props) => {
@@ -32,47 +32,48 @@ const Home = (props) => {
 
     // capture headers
     setApiRateLimit({
-      limit: response.headers.get('X-Ratelimit-Limit'),
-      remaining: response.headers.get('X-Ratelimit-Remaining'),
-      reset: response.headers.get('X-Ratelimit-Reset')
+      limit: response.headers.get("X-Ratelimit-Limit"),
+      remaining: response.headers.get("X-Ratelimit-Remaining"),
+      reset: response.headers.get("X-Ratelimit-Reset"),
     });
 
     if (response.status === 200) {
       response
         .json()
-        .then(res => {
+        .then((res) => {
           setRepoData(res);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
-          setError({ active: true, type: 400 })
+          setError({ active: true, type: 400 });
         });
-    }
-    else {
-      setError({ active: true, type: response.status })
+    } else {
+      setError({ active: true, type: response.status });
     }
   }
 
   async function fetchGitHubUser() {
-    const response = await fetch(`https://api.github.com/users/${userName}`, HTTP_HEADERS);
+    const response = await fetch(
+      `https://api.github.com/users/${userName}`,
+      HTTP_HEADERS
+    );
 
     // capture headers
     setApiRateLimit({
-      limit: response.headers.get('X-Ratelimit-Limit'),
-      remaining: response.headers.get('X-Ratelimit-Remaining'),
-      reset: response.headers.get('X-Ratelimit-Reset')
+      limit: response.headers.get("X-Ratelimit-Limit"),
+      remaining: response.headers.get("X-Ratelimit-Remaining"),
+      reset: response.headers.get("X-Ratelimit-Reset"),
     });
 
     if (response.status === 200) {
       response
         .json()
-        .then(res => setUserData(res))
-        .catch(err => {
-          setError({ active: true, type: 400 })
+        .then((res) => setUserData(res))
+        .catch((err) => {
+          setError({ active: true, type: 400 });
         });
-    }
-    else {
-      setError({ active: true, type: response.status })
+    } else {
+      setError({ active: true, type: response.status });
     }
   }
 
@@ -93,10 +94,9 @@ const Home = (props) => {
   // }
 
   useEffect(() => {
-    if (userName === '') {
-      history.push('/');
+    if (userName === "") {
+      history.push("/");
     } else {
-
       // gives errors even in PROD too
       // if (process.env.NODE_ENV === 'production') {
       // fetchGitHubApiLimit();
@@ -126,8 +126,8 @@ const Home = (props) => {
   }
 
   if (userData == null || !repoData) {
-    return <BusyIndicator />
-  };
+    return <BusyIndicator />;
+  }
 
   return (
     <>
@@ -151,7 +151,7 @@ const Home = (props) => {
         </Row>
       </Col>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

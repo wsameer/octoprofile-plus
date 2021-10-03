@@ -1,20 +1,19 @@
-import React, { useState, useLayoutEffect } from 'react';
-import PropTypes from 'prop-types';
-import ProfileWidget from './ProfileWidget';
-import AccountStats from './AccountStats';
-import PersonalDetails from './PersonalDetails';
-import Branding from './Branding';
-import ListGroup from 'react-bootstrap/ListGroup';
+import React, { useState, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
+import ProfileWidget from "./ProfileWidget";
+import AccountStats from "./AccountStats";
+import PersonalDetails from "./PersonalDetails";
+import Branding from "./Branding";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const Sidenav = ({ userData }) => {
-
   const [collapse, setCollapse] = useState(true);
 
   const toggleCollapse = () => {
     if (window.innerWidth > 575) {
       return setCollapse(true);
     }
-    return setCollapse(prevState => !prevState);
+    return setCollapse((prevState) => !prevState);
   };
 
   const handleWindowResizeEvent = () => {
@@ -24,10 +23,10 @@ const Sidenav = ({ userData }) => {
   };
 
   useLayoutEffect(() => {
-    window.addEventListener('resize', handleWindowResizeEvent);
+    window.addEventListener("resize", handleWindowResizeEvent);
     handleWindowResizeEvent();
     return () => {
-      window.removeEventListener('resize', handleWindowResizeEvent);
+      window.removeEventListener("resize", handleWindowResizeEvent);
     };
   }, []);
 
@@ -39,10 +38,8 @@ const Sidenav = ({ userData }) => {
         collapse={collapse}
       />
 
-      <div className={"collapse" + (collapse ? ' in' : '')}>
-        <ProfileWidget
-          userData={userData}
-        />
+      <div className={"collapse" + (collapse ? " in" : "")}>
+        <ProfileWidget userData={userData} />
 
         <AccountStats
           followers={userData.followers}
@@ -63,7 +60,9 @@ const Sidenav = ({ userData }) => {
         <ListGroup variant="flush" className="sidenav-footer col-sm-12">
           <ListGroup.Item>
             <i className="fa fa-ticket pr-3" aria-hidden="true"></i>
-            <a href="mailto:dev.wsameer@gmail.com"><span>Support</span></a>
+            <a href="mailto:dev.wsameer@gmail.com">
+              <span>Support</span>
+            </a>
           </ListGroup.Item>
         </ListGroup>
       </div>
@@ -72,7 +71,7 @@ const Sidenav = ({ userData }) => {
 };
 
 Sidenav.propTypes = {
-  userData: PropTypes.object.isRequired
+  userData: PropTypes.object.isRequired,
 };
 
 export default Sidenav;
