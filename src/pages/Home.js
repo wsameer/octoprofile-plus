@@ -84,6 +84,10 @@ const Home = (props) => {
           .then(({ status }) => setApiStatus(status))
           .catch(err => {
             setError({ active: true, type: response.status })
+            setApiStatus({
+                indicator: 'critical',
+                description: "Unable to get status"
+            })
           });
       }, [setApiStatus]);
 

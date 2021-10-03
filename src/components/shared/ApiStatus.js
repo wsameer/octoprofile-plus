@@ -1,6 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const mapStatusToIcon = (status) => {
+  switch(status){
+    case "none":
+      return '✅';
+    case "minor":
+      return '⚠️';
+    case "major":
+      return '❌';
+    case "critical":
+    default:
+      return '☠️';
+  }
+}
+
+
 const ApiStatus = ({ apiRateLimit,apiStatus }) => {
   return (
     <div className="api-status text-center">
@@ -8,12 +23,9 @@ const ApiStatus = ({ apiRateLimit,apiStatus }) => {
       {' '}
       <span>requests left</span>
       <div>
-        {apiStatus.indicator === "none"
-        ? <span role="img" aria-label="operational">✅</span>
-        : <span role="img" aria-label="not operational">❌</span>
-        }
-      {' '}
-      <span>{apiStatus.description}</span>
+        <span role="img" aria-label={apiStatus.description}>{mapStatusToIcon(apiStatus.indicator)}</span>
+        {' '}
+        <span>{apiStatus.description}</span>
       </div>
     </div>
   )
