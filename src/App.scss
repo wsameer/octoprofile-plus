@@ -21,8 +21,8 @@ $screen-lg-min: 992px;
 // Large tablets and desktops
 $screen-xl-min: 1200px;
 
-/** 
- * MIXINS 
+/**
+ * MIXINS
  */
 // Small devices
 @mixin sm {
@@ -123,7 +123,7 @@ a {
   background-color: $black-russian;
   color           : $white;
 
-  .rate-limit {
+  .api-status {
 
     display: none;
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from "react-bootstrap";
 import { Repositories, Analytics, Overview, Error } from "../components";
-import { Sidenav, ApiRateLimit, BusyIndicator } from "../components/shared";
+import { Sidenav, ApiStatus, BusyIndicator } from "../components/shared";
 
 // import { mockUserData, mockRepoData } from '../utils/mockdata';
 // const mockLimit = { limit: "60", remaining: "47", reset: "1591507162" };
@@ -22,6 +22,7 @@ const Home = (props) => {
     const [userData, setUserData] = useState(null);
     const [repoData, setRepoData] = useState(null);
     const [apiRateLimit, setApiRateLimit] = useState(null);
+    const [apiStatus, setApiStatus] = useState(null);
 
     const fetchRepoData = useCallback(async () => {
         const response = await fetch(
@@ -75,6 +76,21 @@ const Home = (props) => {
         }
     }, [setApiRateLimit, setError, userName]);
 
+    const fetchApiStatus = useCallback(async () => {
+        const response = await fetch('https://www.githubstatus.com/api/v2/status.json');
+
+        response
+          .json()
+          .then(({ status }) => setApiStatus(status))
+          .catch(err => {
+            setError({ active: true, type: response.status })
+            setApiStatus({
+                indicator: 'critical',
+                description: "Unable to get status"
+            })
+          });
+      }, [setApiStatus]);
+
     // Doesn't work due to CORS restrictions :(
     // async function fetchGitHubApiLimit() {
     //   const response = await fetch(`https://api.github.com/rate_limit`, HTTP_HEADERS);
@@ -101,6 +117,7 @@ const Home = (props) => {
             // }
 
             // get data
+            fetchApiStatus();
             fetchGitHubUser();
             fetchRepoData();
 
@@ -113,7 +130,7 @@ const Home = (props) => {
             //   reset: mockLimit.reset
             // });
         }
-    }, [fetchGitHubUser, fetchRepoData, history, userName]);
+    }, [fetchApiStatus, fetchGitHubUser, fetchRepoData, history, userName]);
 
     if (error && error.active) {
         return (
@@ -129,7 +146,7 @@ const Home = (props) => {
 
     return (
         <>
-            {apiRateLimit && <ApiRateLimit apiRateLimit={apiRateLimit} />}
+            {apiRateLimit && apiStatus && <ApiStatus apiRateLimit={apiRateLimit} apiStatus={apiStatus} />}
             <Col sm={3} className="sidenav">
                 <Sidenav userData={userData} />
             </Col>
