@@ -6,14 +6,20 @@ import { formatDate } from '../../utils/commonfunctions';
 const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
   return (
     <ListGroup variant="flush" className="personal-details">
-      <ListGroup.Item>
-        <i className="fa fa-suitcase pr-3" aria-hidden="true"></i>
-        <span>{company}</span>
-      </ListGroup.Item>
-      <ListGroup.Item>
-        <i className="fa fa-map-marker pr-3" aria-hidden="true"></i>
-        <span>{location}</span>
-      </ListGroup.Item>
+      {
+        company && 
+        <ListGroup.Item>
+          <i className="fa fa-suitcase pr-3" aria-hidden="true"></i>
+          <span>{company}</span>
+        </ListGroup.Item>
+      }
+      {
+        location && 
+        <ListGroup.Item>
+          <i className="fa fa-map-marker pr-3" aria-hidden="true"></i>
+          <span>{location}</span>
+        </ListGroup.Item>
+      }
       {
         email &&
         <ListGroup.Item>

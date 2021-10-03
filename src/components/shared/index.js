@@ -1,5 +1,5 @@
 import AccountStats from './AccountStats';
-import ApiRateLimit from './ApiRateLimit';
+import ApiStatus from './ApiStatus';
 import Branding from './Branding';
 import BusyIndicator from './BusyIndicator';
 import Filters from './Filters';
@@ -8,4 +8,4 @@ import PersonalDetails from './PersonalDetails';
 import ProfileWidget from './ProfileWidget';
 import Sidenav from './Sidenav';
 
-export { AccountStats, ApiRateLimit, Branding, BusyIndicator, Filters, Header, Sidenav, ProfileWidget, PersonalDetails };
+export { AccountStats, ApiStatus, Branding, BusyIndicator, Filters, Header, Sidenav, ProfileWidget, PersonalDetails };
