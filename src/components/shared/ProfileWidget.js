@@ -14,7 +14,7 @@ const ProfileWidget = ({ userData }) => {
           />
           <h4>{userData.name}</h4>
           <a
-            href={userData.url}
+            href={userData.html_url}
             target="_blank"
             rel="noopener noreferrer">
             @{userData.login}
