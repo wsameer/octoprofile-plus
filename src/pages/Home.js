@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory } from "react-router-dom";
 import { Col, Row, Tabs, Tab } from 'react-bootstrap';
 import { Repositories, Analytics, Overview, Error } from '../components';
-import { Sidenav, ApiRateLimit, BusyIndicator } from '../components/shared';
+import { Sidenav, ApiStatus, BusyIndicator } from '../components/shared';
 
 // import { mockUserData, mockRepoData } from '../utils/mockdata';
 // const mockLimit = { limit: "60", remaining: "47", reset: "1591507162" };
@@ -23,8 +23,9 @@ const Home = (props) => {
   const [userData, setUserData] = useState(null);
   const [repoData, setRepoData] = useState(null);
   const [apiRateLimit, setApiRateLimit] = useState(null);
+  const [apiStatus, setApiStatus] = useState(null);
 
-  async function fetchRepoData() {
+  const fetchRepoData = useCallback(async () => {
     const response = await fetch(
       `https://api.github.com/users/${userName}/repos?sort=pushed&per_page=${LIMIT}`,
       HTTP_HEADERS
@@ -51,9 +52,9 @@ const Home = (props) => {
     else {
       setError({ active: true, type: response.status })
     }
-  }
+  }, [userName])
 
-  async function fetchGitHubUser() {
+  const fetchGitHubUser = useCallback(async () => {
     const response = await fetch(`https://api.github.com/users/${userName}`, HTTP_HEADERS);
 
     // capture headers
@@ -74,7 +75,19 @@ const Home = (props) => {
     else {
       setError({ active: true, type: response.status })
     }
-  }
+  }, [userName])
+
+  const fetchApiStatus = useCallback(async () => {
+    const response = await fetch('https://www.githubstatus.com/api/v2/status.json');
+
+    response
+      .json()
+      .then(({ status }) => setApiStatus(status))
+      .catch(err => {
+        setError({ active: true, type: response.status })
+      });
+  }, []);
+
 
   // Doesn't work due to CORS restrictions :(
   // async function fetchGitHubApiLimit() {
@@ -103,6 +116,7 @@ const Home = (props) => {
       // }
 
       // get data
+      fetchApiStatus();
       fetchGitHubUser();
       fetchRepoData();
 
@@ -115,7 +129,7 @@ const Home = (props) => {
       //   reset: mockLimit.reset
       // });
     }
-  }, []);
+  }, [fetchApiStatus, fetchGitHubUser, fetchRepoData, history, userName]);
 
   if (error && error.active) {
     return (
@@ -131,7 +145,7 @@ const Home = (props) => {
 
   return (
     <>
-      {apiRateLimit && <ApiRateLimit apiRateLimit={apiRateLimit} />}
+      {apiRateLimit && apiStatus && <ApiStatus apiRateLimit={apiRateLimit} apiStatus={apiStatus} />}
       <Col sm={3} className="sidenav">
         <Sidenav userData={userData} />
       </Col>
