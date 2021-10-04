@@ -21,13 +21,8 @@
       "profile": "https://wsameer.github.io/v1/",
       "contributions": [
         "code",
-        "content",
-        "data",
         "bug",
-        "doc",
         "design",
-        "ideas",
-        "infra",
         "maintenance",
         "test"
       ]
