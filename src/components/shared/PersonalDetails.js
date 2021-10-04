@@ -27,10 +27,13 @@ const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
           <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">{email}</a>
         </ListGroup.Item>
       }
-      <ListGroup.Item>
-        <i className="fa fa-link pr-3" aria-hidden="true"></i>
-        <a href={blog} target="_blank" rel="noopener noreferrer">{blog}</a>
-      </ListGroup.Item>
+      {
+        blog &&
+        <ListGroup.Item>
+          <i className="fa fa-link pr-3" aria-hidden="true"></i>
+          <a href={blog} target="_blank" rel="noopener noreferrer">{blog}</a>
+        </ListGroup.Item>
+      }
       <ListGroup.Item>
         <i className="fa fa-calendar pr-3" aria-hidden="true"></i>
         <span>{formatDate(createdAt)}</span>
