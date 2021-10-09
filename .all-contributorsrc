@@ -13,6 +13,29 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "wsameer",
+      "name": "Sameer Waskar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8468992?v=4",
+      "profile": "https://wsameer.github.io/v1/",
+      "contributions": [
+        "code",
+        "bug",
+        "design",
+        "maintenance",
+        "test"
+      ]
+    },
+    {
+      "login": "nishchay17",
+      "name": "Nishchay",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48904113?v=4",
+      "profile": "https://nishchay17.netlify.com/",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

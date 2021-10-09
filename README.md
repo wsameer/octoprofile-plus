@@ -1,6 +1,6 @@
 ## Octoprofile Plus
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A nicer look at your GitHub Profile! With themes, charts and React!
@@ -60,6 +60,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://agreon.de"><img src="https://avatars.githubusercontent.com/u/4455258?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Huth</b></sub></a><br /><a href="https://github.com/wsameer/octoprofile-plus/issues?q=author%3AAgreon" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://wsameer.github.io/v1/"><img src="https://avatars.githubusercontent.com/u/8468992?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sameer Waskar</b></sub></a><br /><a href="https://github.com/wsameer/octoprofile-plus/commits?author=wsameer" title="Code">💻</a> <a href="https://github.com/wsameer/octoprofile-plus/issues?q=author%3Awsameer" title="Bug reports">🐛</a> <a href="#design-wsameer" title="Design">🎨</a> <a href="#infra-wsameer" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-wsameer" title="Maintenance">🚧</a> <a href="https://github.com/wsameer/octoprofile-plus/commits?author=wsameer" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://nishchay17.netlify.com/"><img src="https://avatars.githubusercontent.com/u/48904113?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nishchay</b></sub></a><br /><a href="https://github.com/wsameer/octoprofile-plus/issues?q=author%3Anishchay17" title="Bug reports">🐛</a> <a href="https://github.com/wsameer/octoprofile-plus/commits?author=nishchay17" title="Code">💻</a></td>
   </tr>
 </table>
 

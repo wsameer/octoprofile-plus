@@ -6,11 +6,16 @@ import { relativeTimeConvertor } from '../../utils/commonfunctions';
 const RepoFooter = ({ ...args }) => {
   return (
     <>
-      <span
-        className="repo-language-color mr-1"
-        style={{ backgroundColor: langColors[args.language] }}
-      />
-      <span className="repo-language pr-3">{args.language}</span>
+      {args.language ?
+        <>
+          <span
+            className="repo-language-color mr-1"
+            style={{ backgroundColor: langColors[args.language] }}
+          />
+          <span className="repo-language pr-3">{args.language}</span>
+        </>
+        : null
+      }
       {args.viewType === 'grid' && <br className="d-block d-md-none" />}
       <a href={args.stargazersUrl} className="pinned-item-meta muted-link pr-3">
         <i className="fa fa-star mr-1" aria-hidden="true"></i>
