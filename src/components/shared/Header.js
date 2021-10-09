@@ -1,14 +1,10 @@
-import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import React from "react";
+import { Row, Col } from "react-bootstrap";
 
-const Header = (props) => {
-  return (
+const Header = () => (
     <Row className="header d-block d-sm-none">
-      <Col sm={12}>
-        This is the header
-      </Col>
+        <Col sm={12}>This is the header</Col>
     </Row>
-  )
-}
+);
 
-export default Header
+export default Header;
