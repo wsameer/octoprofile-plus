@@ -24,7 +24,6 @@ const Analytics = ({ repoData }) => {
 
     useEffect(() => {
         const convertedData = convertMapToArray(extractLanguages());
-        console.log(convertedData);
         setAnalyticsData((analyticsData) => [
             ...analyticsData,
             ...convertedData,
