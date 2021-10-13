@@ -3,17 +3,17 @@ import { Container, Row } from "react-bootstrap";
 import { Route, Switch } from "react-router";
 
 const Home = lazy(() => import("../pages/Home"));
-const Start = lazy(() => import("../pages/Start"));
+const Profile = lazy(() => import("../pages/Profile"));
 const BusyIndicator = lazy(() => import("./shared/BusyIndicator"));
 
 const ROUTES = [
     {
         path: "/",
-        component: Start,
+        component: Home,
     },
     {
-        path: "/home",
-        component: Home,
+        path: "/:slug",
+        component: Profile,
     },
 ];
 
