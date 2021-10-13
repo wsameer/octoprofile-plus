@@ -32,14 +32,14 @@ const Analytics = ({ repoData }) => {
 
     return (
         <Row className="analytics pt-4">
-            <h5 className="mt-0 mb-4 col-12">Top Technologies</h5>
+            <h5 className="mt-0 mb-4 col-12">Top Languages</h5>
             <Col sm={6} className="mb-3">
                 {analyticsData.length && (
                     <Table bordered hover variant="dark">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Technology</th>
+                                <th>Language</th>
                                 <th>Repositories</th>
                             </tr>
                         </thead>
