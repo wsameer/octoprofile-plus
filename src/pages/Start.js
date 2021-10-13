@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Col, Form } from 'react-bootstrap';
-import logo from '../github-plus.png';
 import { useHistory } from 'react-router-dom';
 
 const Start = () => {
@@ -26,7 +25,7 @@ const Start = () => {
       className="start text-center mt-5">
       <img
         className="mb-4"
-        src={logo}
+        src="/github-plus.png"
         alt="Logo"
         height="120"
       />
