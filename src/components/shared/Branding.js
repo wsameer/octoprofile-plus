@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import brandLogo from "../../github-plus.png";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Branding = ({ hireable, collapse, toggleCollapse }) => {
     return (
         <div className="branding col-md">
             <Link to="/">
-                <img className="brand-logo" src={brandLogo} alt="brand-logo" />
+                <img className="brand-logo" src="/github-plus.png" alt="brand-logo" />
             </Link>
 
             <div className="d-block d-sm-none float-right hireable ml-3">
