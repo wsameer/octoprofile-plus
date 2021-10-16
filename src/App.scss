@@ -1,11 +1,11 @@
 /**
  * VARIABLES
  */
-$ebony        : #2d3035 !default;
+$ebony: #2d3035 !default;
 $black-russian: #22252a !default;
-$jade         : #00cd69 !default;
-$jade-lite    : #00cd6982 !default;
-$white        : #fff !default;
+$jade: #00cd69 !default;
+$jade-lite: #00cd6982 !default;
+$white: #fff !default;
 
 $primary-color: $ebony;
 
@@ -26,465 +26,462 @@ $screen-xl-min: 1200px;
  */
 // Small devices
 @mixin sm {
-  @media (min-width: #{$screen-sm-min}) {
-    @content;
-  }
+    @media (min-width: #{$screen-sm-min}) {
+        @content;
+    }
 }
 
 // Medium devices
 @mixin md {
-  @media (min-width: #{$screen-md-min}) {
-    @content;
-  }
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
 }
 
 // Large devices
 @mixin lg {
-  @media (min-width: #{$screen-lg-min}) {
-    @content;
-  }
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
 }
 
 // Extra large devices
 @mixin xl {
-  @media (min-width: #{$screen-xl-min}) {
-    @content;
-  }
+    @media (min-width: #{$screen-xl-min}) {
+        @content;
+    }
 }
 
 @mixin box-shadow($x, $y, $blur, $c) {
-  -webkit-box-shadow: $x $y $blur $c;
-  -moz-box-shadow   : $x $y $blur $c;
-  -ms-box-shadow    : $x $y $blur $c;
-  box-shadow        : $x $y $blur $c;
+    -webkit-box-shadow: $x $y $blur $c;
+    -moz-box-shadow: $x $y $blur $c;
+    -ms-box-shadow: $x $y $blur $c;
+    box-shadow: $x $y $blur $c;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing : antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color       : $black-russian !important;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: $black-russian !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
 }
 
 .btn {
-  outline: none;
-
-  &:focus,
-  &:active {
     outline: none;
-  }
+
+    &:focus,
+    &:active {
+        outline: none;
+    }
 }
 
 .btn-primary {
-  background-color: $black-russian !important;
-  border-color    : $jade !important;
-  color           : $jade !important;
-  outline         : none;
+    background-color: $black-russian !important;
+    border-color: $jade !important;
+    color: $jade !important;
+    outline: none;
 }
 
 .btn-primary:focus {
-  box-shadow: none;
-  outline   : none;
+    box-shadow: none;
+    outline: none;
 }
 
 .dropdown-toggle:focus {
-  box-shadow: none !important;
-  outline   : none;
+    box-shadow: none !important;
+    outline: none;
 }
 
 a {
-  color: $white !important;
+    color: $white !important;
 }
 
 .spinner-border {
-  position       : absolute;
-  height         : 60px !important;
-  width          : 60px !important;
-  top            : 50%;
-  left           : 50%;
-  margin-left    : -30px;
-  margin-top     : -50px;
-  background-size: 100%;
+    position: absolute;
+    height: 60px !important;
+    width: 60px !important;
+    top: 50%;
+    left: 50%;
+    margin-left: -30px;
+    margin-top: -50px;
+    background-size: 100%;
 
-  @include md {
-    margin-left: -50px;
-  }
+    @include md {
+        margin-left: -50px;
+    }
 }
 
 .App {
-  background-color: $black-russian;
-  color           : $white;
+    background-color: $black-russian;
+    color: $white;
 
-  .api-status {
+    .api-status {
+        display: none;
 
-    display: none;
-
-    @include md {
-      position : absolute;
-      font-size: 11px;
-      display  : block;
-      right    : 20px;
-      z-index  : 1;
-      top      : 10px;
-      padding  : 15px;
-      opacity  : 0.7;
-    }
-  }
-
-  .start {
-    height: 100%;
-    width : 100%;
-
-    img {
-      margin-top: 35%;
+        @include md {
+            position: absolute;
+            font-size: 11px;
+            display: block;
+            right: 20px;
+            z-index: 1;
+            top: 10px;
+            padding: 15px;
+            opacity: 0.7;
+        }
     }
 
-    .form-label {
-      font-size: 24px;
-    }
-  }
+    .start {
+        height: 100%;
+        width: 100%;
 
-  .header {
-    background-color: $primary-color;
-  }
+        img {
+            margin-top: 35%;
+        }
 
-  .sidenav {
-    background-color: $primary-color;
-    height: 100vh; 
-    // fixing the sidebar
-    position: sticky;
-    top: 0;
-    padding         : 1.5rem;
-    
-    @media (max-width: 576px) {
-      position: relative;
+        .form-label {
+            font-size: 24px;
+        }
     }
 
-    @include lg {
-      padding   : 1.25rem 2.25rem;
+    .header {
+        background-color: $primary-color;
     }
 
-    .collapse {
-      display: none;
-    }
+    .sidenav {
+        background-color: $primary-color;
+        height: 100vh;
+        // fixing the sidebar
+        position: sticky;
+        top: 0;
+        padding: 1.5rem;
 
-    .collapse.in {
-      display: block;
-    }
-
-    div[class^='col'],
-    div[class*='col'] {
-      padding: 0 !important;
-    }
-
-    .list-group-item {
-      background-color: $primary-color;
-      color           : $white;
-      text-align      : left;
-      border          : none;
-      font-size       : 14px;
-
-      span {
-        top     : 1px;
-        position: relative;
-      }
-
-      i {
-        font-size     : 14px;
-        width         : 25px;
-        vertical-align: middle;
-      }
-    }
-
-    .branding {
-      background-color: $primary-color;
-
-      .brand-logo {
-        height    : 40px;
-        margin-top: 5px;
+        @media (max-width: 576px) {
+            position: relative;
+        }
 
         @include lg {
-          height    : 48px;
-          margin-top: 0;
-        }
-      }
-
-      .hireable {
-        margin: 10px 0;
-
-        .green {
-          color: $jade;
+            padding: 1.25rem 2.25rem;
         }
 
-        .red {
-          color: red;
-        }
-      }
-    }
-
-    .profile-widget {
-      .card {
-        background-color: $primary-color;
-        color           : $white;
-        border          : none;
-
-        .card-body {
-          .img-lg {
-            width        : 72px;
-            height       : 72px;
-            border-radius: 50%;
-            border       : 4px solid $white;
-
-            @include md {
-              width : 90px;
-              height: 90px;
-            }
-
-            @include lg {
-              width : 120px;
-              height: 120px;
-            }
-          }
-
-          h4 {
-            font-size    : 14px;
-            font-weight  : 400;
-            margin-bottom: 2px;
-
-            @include lg {
-              font-size: 20px;
-            }
-          }
-
-          a {
-            font-size: 14px;
-          }
-        }
-      }
-    }
-
-    .account-stats {
-      .stats {
-        font-size: 14px;
-      }
-    }
-
-    .personal-details {
-      .list-group-item {
-        padding      : 15px 0;
-        white-space  : nowrap;
-        overflow     : hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .sidenav-footer {
-      bottom  : 0;
-      left    : 0;
-      position: absolute;
-      right   : 0;
-
-      .list-group-item {
-        padding: 2.25rem;
-      }
-    }
-  }
-
-  .dashboard {
-    .nav-tabs {
-      border-bottom   : 0;
-      background-color: $ebony;
-      width           : 100%;
-      padding-top     : 20px;
-
-      .nav-item {
-        &.active {
-          background-color: $primary-color;
-          border          : 0;
-          border-bottom   : 4px solid $jade;
-          opacity         : 1;
-        }
-      }
-
-      .nav-link {
-        border       : 0;
-        outline      : 0;
-        border-bottom: 4px solid $ebony;
-        opacity      : 0.7;
-
-        &:focus,
-        &:hover {
-          border       : 0;
-          outline      : 0;
-          border-bottom: 4px solid $jade;
-        }
-      }
-    }
-
-    .tab-content {
-      width: 100%;
-    }
-
-    /* also overviews */
-    .repositories {
-      margin: 10px;
-
-      @include lg {
-        margin: 10px 25px 10px 15px;
-      }
-
-      .filters {
-        .btn-secondary.active {
-          background-color: $jade;
-          border          : 1px solid $jade;
-          box-shadow      : none;
+        .collapse {
+            display: none;
         }
 
-        .btn-secondary {
-          background-color: transparent;
-          box-shadow      : none;
+        .collapse.in {
+            display: block;
         }
 
-        .dropdown-menu {
-          background-color: $black-russian;
-          box-shadow      : 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
-          .dropdown-item {
-            color      : $white;
-            font-weight: 100;
-            font-size  : 14px;
-            opacity    : 0.7;
-
-            &:hover {
-              background-color: $black-russian;
-              color           : $white;
-              opacity         : 1;
-              font-size       : 14px;
-            }
-
-            &:focus {
-              border : none;
-              outline: none;
-            }
-          }
+        div[class^='col'],
+        div[class*='col'] {
+            padding: 0 !important;
         }
-      }
 
-      .card {
-        background-color: $primary-color;
-        color           : $white;
-
-        .card-body {
-          padding: 10px;
-
-          @include lg {
-            padding: 1.25rem;
-          }
-
-          .h5 {
+        .list-group-item {
+            background-color: $primary-color;
+            color: $white;
+            text-align: left;
+            border: none;
             font-size: 14px;
 
-            @include lg {
-              font-size: 16px;
-            }
-          }
-
-          .badge-green {
-            color           : $white;
-            background-color: $jade-lite;
-            padding         : 8px 14px;
-            border-radius   : 2px;
-            margin-right    : 10px;
-            margin-bottom   : 10px;
-            font-size       : 12px;
-            font-weight     : 400;
-
-            &:hover {
-              background-color: $jade;
+            span {
+                top: 1px;
+                position: relative;
             }
 
-            @include lg {
-              margin-bottom: 2px;
+            i {
+                font-size: 14px;
+                width: 25px;
+                vertical-align: middle;
             }
-
-          }
-
-          .height-50 {
-            height       : 50px;
-            white-space  : break-spaces;
-            overflow     : hidden;
-            text-overflow: ellipsis;
-          }
-
-          .repo-desc {
-            font-size: 12px;
-
-            @include lg {
-              font-size: 14px;
-            }
-          }
-
-          .text-semi-muted {
-            opacity: 0.7;
-          }
         }
 
-        .card-footer {
-          font-size: 10px;
-          padding  : 10px;
+        .branding {
+            background-color: $primary-color;
 
-          @include lg {
-            padding  : 1.25rem;
-            font-size: 12px;
-          }
+            .brand-logo {
+                height: 40px;
+                margin-top: 5px;
 
-          .repo-language-color {
-            position     : relative;
-            top          : 1px;
-            display      : inline-block;
-            width        : 10px;
-            height       : 10px;
-            border-radius: 50%;
-
-            @include lg {
-              width : 12px;
-              height: 12px;
-              top   : 2px;
+                @include lg {
+                    height: 48px;
+                    margin-top: 0;
+                }
             }
-          }
+
+            .hireable {
+                margin: 10px 0;
+
+                .green {
+                    color: $jade;
+                }
+
+                .red {
+                    color: red;
+                }
+            }
         }
-      }
+
+        .profile-widget {
+            .card {
+                background-color: $primary-color;
+                color: $white;
+                border: none;
+
+                .card-body {
+                    .img-lg {
+                        width: 72px;
+                        height: 72px;
+                        border-radius: 50%;
+                        border: 4px solid $white;
+
+                        @include md {
+                            width: 90px;
+                            height: 90px;
+                        }
+
+                        @include lg {
+                            width: 120px;
+                            height: 120px;
+                        }
+                    }
+
+                    h4 {
+                        font-size: 14px;
+                        font-weight: 400;
+                        margin-bottom: 2px;
+
+                        @include lg {
+                            font-size: 20px;
+                        }
+                    }
+
+                    a {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .account-stats {
+            .stats {
+                font-size: 14px;
+            }
+        }
+
+        .personal-details {
+            .list-group-item {
+                padding: 15px 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .sidenav-footer {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+
+            .list-group-item {
+                padding: 2.25rem;
+            }
+        }
     }
 
-    .analytics {
-      margin: 20px;
+    .dashboard {
+        .nav-tabs {
+            border-bottom: 0;
+            background-color: $ebony;
+            width: 100%;
+            padding-top: 20px;
 
-      @include lg {
-        margin: 10px 25px 10px 15px;
-      }
+            .nav-item {
+                &.active {
+                    background-color: $primary-color;
+                    border: 0;
+                    border-bottom: 4px solid $jade;
+                    opacity: 1;
+                }
+            }
 
-      .bg-lite-dark {
-        background-color: $ebony;
-        padding         : 1.25rem;
-        height          : 100%;
-      }
+            .nav-link {
+                border: 0;
+                outline: 0;
+                border-bottom: 4px solid $ebony;
+                opacity: 0.7;
 
-      .table-dark {
-        font-size: 14px;
-
-        td {
-          padding: 10px;
+                &:focus,
+                &:hover {
+                    border: 0;
+                    outline: 0;
+                    border-bottom: 4px solid $jade;
+                }
+            }
         }
-      }
-    }
-  }
 
+        .tab-content {
+            width: 100%;
+        }
+
+        /* also overviews */
+        .repositories {
+            margin: 10px;
+
+            @include lg {
+                margin: 10px 25px 10px 15px;
+            }
+
+            .filters {
+                .btn-secondary.active {
+                    background-color: $jade;
+                    border: 1px solid $jade;
+                    box-shadow: none;
+                }
+
+                .btn-secondary {
+                    background-color: transparent;
+                    box-shadow: none;
+                }
+
+                .dropdown-menu {
+                    background-color: $black-russian;
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+                        0 3px 6px rgba(0, 0, 0, 0.23);
+
+                    .dropdown-item {
+                        color: $white;
+                        font-weight: 100;
+                        font-size: 14px;
+                        opacity: 0.7;
+
+                        &:hover {
+                            background-color: $black-russian;
+                            color: $white;
+                            opacity: 1;
+                            font-size: 14px;
+                        }
+
+                        &:focus {
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+            .card {
+                background-color: $primary-color;
+                color: $white;
+
+                .card-body {
+                    padding: 10px;
+
+                    @include lg {
+                        padding: 1.25rem;
+                    }
+
+                    .h5 {
+                        font-size: 14px;
+
+                        @include lg {
+                            font-size: 16px;
+                        }
+                    }
+
+                    .badge-green {
+                        color: $white;
+                        background-color: $jade-lite;
+                        padding: 8px 14px;
+                        border-radius: 2px;
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                        font-size: 12px;
+                        font-weight: 400;
+
+                        &:hover {
+                            background-color: $jade;
+                        }
+
+                        @include lg {
+                            margin-bottom: 2px;
+                        }
+                    }
+
+                    .height-50 {
+                        height: 50px;
+                        white-space: break-spaces;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .repo-desc {
+                        font-size: 12px;
+
+                        @include lg {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .text-semi-muted {
+                        opacity: 0.7;
+                    }
+                }
+
+                .card-footer {
+                    font-size: 10px;
+                    padding: 10px;
+
+                    @include lg {
+                        padding: 1.25rem;
+                        font-size: 12px;
+                    }
+
+                    .repo-language-color {
+                        position: relative;
+                        top: 1px;
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+
+                        @include lg {
+                            width: 12px;
+                            height: 12px;
+                            top: 2px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .analytics {
+            margin: 20px;
+
+            @include lg {
+                margin: 10px 25px 10px 15px;
+            }
+
+            .bg-lite-dark {
+                background-color: $ebony;
+                padding: 1.25rem;
+                height: 100%;
+            }
+
+            .table-dark {
+                font-size: 14px;
+
+                td {
+                    padding: 10px;
+                }
+            }
+        }
+    }
 }

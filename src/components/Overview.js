@@ -1,15 +1,15 @@
-import React, { useEffect, useCallback, useState } from "react";
-import PropTypes from "prop-types";
-import { Row, Col, Card } from "react-bootstrap";
-import RepoFooter from "./repocard/RepoFooter";
-import Topics from "./repocard/Topics";
-import Filters from "./shared/Filters";
-import { relativeTimeConvertor } from "../utils/commonfunctions";
-import RepoDesc from "./repocard/RepoDesc";
+import React, { useEffect, useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
+import { Row, Col, Card } from 'react-bootstrap';
+import RepoFooter from './repocard/RepoFooter';
+import Topics from './repocard/Topics';
+import Filters from './shared/Filters';
+import { relativeTimeConvertor } from '../utils/commonfunctions';
+import RepoDesc from './repocard/RepoDesc';
 
 const Overview = ({ repoData }) => {
-    const sortTypes = ["stars", "forks", "size"],
-        viewTypes = ["grid", "list"],
+    const sortTypes = ['stars', 'forks', 'size'],
+        viewTypes = ['grid', 'list'],
         LIMIT = 9;
 
     const [sortType, setSortType] = useState(sortTypes[0]),
@@ -17,20 +17,20 @@ const Overview = ({ repoData }) => {
         [viewType, setViewType] = useState(viewTypes[0]);
 
     const sortRepos = useCallback(
-            (type) => {
+            type => {
                 if (!repoData || repoData.length === 0) {
                     return;
                 }
 
                 const sortMap = {
-                    stars: "stargazers_count",
-                    forks: "forks_count",
-                    size: "size",
+                    stars: 'stargazers_count',
+                    forks: 'forks_count',
+                    size: 'size'
                 };
 
                 const sortBy = sortMap[type];
                 const sortedData = repoData
-                    .filter((repo) => !repo.fork)
+                    .filter(repo => !repo.fork)
                     .sort((a, b) => b[sortBy] - a[sortBy])
                     .slice(0, LIMIT);
 
@@ -38,8 +38,8 @@ const Overview = ({ repoData }) => {
             },
             [repoData, setTopRepos]
         ),
-        changeViewType = (value) => setViewType(value || viewTypes[0]),
-        changeSortType = (value) => setSortType(value || sortTypes[0]);
+        changeViewType = value => setViewType(value || viewTypes[0]),
+        changeSortType = value => setSortType(value || sortTypes[0]);
 
     useEffect(() => {
         sortRepos(sortType);
@@ -96,7 +96,7 @@ const Overview = ({ repoData }) => {
                                     </a>
                                     {viewType === viewTypes[1] && (
                                         <small className="float-right">
-                                            Updated{" "}
+                                            Updated{' '}
                                             {relativeTimeConvertor(
                                                 repo.updated_at
                                             )}
@@ -109,8 +109,8 @@ const Overview = ({ repoData }) => {
                                         title={repo.description}
                                         className={`text-semi-muted repo-desc ${
                                             viewType === viewTypes[0]
-                                                ? "height-50"
-                                                : ""
+                                                ? 'height-50'
+                                                : ''
                                         }`}
                                     >
                                         <RepoDesc
@@ -145,7 +145,7 @@ const Overview = ({ repoData }) => {
 };
 
 Overview.propTypes = {
-    repoData: PropTypes.array.isRequired,
+    repoData: PropTypes.array.isRequired
 };
 
 export default Overview;

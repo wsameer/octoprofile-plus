@@ -7,72 +7,71 @@ import Branding from './Branding';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 const Sidenav = ({ userData }) => {
+    const [collapse, setCollapse] = useState(true);
 
-  const [collapse, setCollapse] = useState(true);
-
-  const toggleCollapse = () => {
-    if (window.innerWidth > 575) {
-      return setCollapse(true);
-    }
-    return setCollapse(prevState => !prevState);
-  };
-
-  const handleWindowResizeEvent = () => {
-    if (window.innerWidth > 575) {
-      setCollapse(true);
-    }
-  };
-
-  useLayoutEffect(() => {
-    window.addEventListener('resize', handleWindowResizeEvent);
-    handleWindowResizeEvent();
-    return () => {
-      window.removeEventListener('resize', handleWindowResizeEvent);
+    const toggleCollapse = () => {
+        if (window.innerWidth > 575) {
+            return setCollapse(true);
+        }
+        return setCollapse(prevState => !prevState);
     };
-  }, []);
 
-  return (
-    <>
-      <Branding
-        hireable={userData.hireable}
-        toggleCollapse={toggleCollapse}
-        collapse={collapse}
-      />
+    const handleWindowResizeEvent = () => {
+        if (window.innerWidth > 575) {
+            setCollapse(true);
+        }
+    };
 
-      <div className={"collapse" + (collapse ? ' in' : '')}>
-        <ProfileWidget
-          userData={userData}
-        />
+    useLayoutEffect(() => {
+        window.addEventListener('resize', handleWindowResizeEvent);
+        handleWindowResizeEvent();
+        return () => {
+            window.removeEventListener('resize', handleWindowResizeEvent);
+        };
+    }, []);
 
-        <AccountStats
-          followers={userData.followers}
-          following={userData.following}
-          publicRepos={userData.public_repos}
-        />
+    return (
+        <>
+            <Branding
+                hireable={userData.hireable}
+                toggleCollapse={toggleCollapse}
+                collapse={collapse}
+            />
 
-        <PersonalDetails
-          createdAt={userData.created_at}
-          email={userData.email}
-          company={userData.company}
-          blog={userData.blog}
-          location={userData.location}
-        />
+            <div className={'collapse' + (collapse ? ' in' : '')}>
+                <ProfileWidget userData={userData} />
 
-        <hr />
+                <AccountStats
+                    followers={userData.followers}
+                    following={userData.following}
+                    publicRepos={userData.public_repos}
+                />
 
-        <ListGroup variant="flush" className="sidenav-footer col-sm-12">
-          <ListGroup.Item>
-            <i className="fa fa-ticket pr-3" aria-hidden="true"></i>
-            <a href="mailto:dev.wsameer@gmail.com"><span>Support</span></a>
-          </ListGroup.Item>
-        </ListGroup>
-      </div>
-    </>
-  );
+                <PersonalDetails
+                    createdAt={userData.created_at}
+                    email={userData.email}
+                    company={userData.company}
+                    blog={userData.blog}
+                    location={userData.location}
+                />
+
+                <hr />
+
+                <ListGroup variant="flush" className="sidenav-footer col-sm-12">
+                    <ListGroup.Item>
+                        <i className="fa fa-ticket pr-3" aria-hidden="true"></i>
+                        <a href="mailto:dev.wsameer@gmail.com">
+                            <span>Support</span>
+                        </a>
+                    </ListGroup.Item>
+                </ListGroup>
+            </div>
+        </>
+    );
 };
 
 Sidenav.propTypes = {
-  userData: PropTypes.object.isRequired
+    userData: PropTypes.object.isRequired
 };
 
 export default Sidenav;

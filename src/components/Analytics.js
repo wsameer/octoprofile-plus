@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
-import PropTypes from "prop-types";
-import { Row, Col, Table } from "react-bootstrap";
-import PieChart from "./charts/PieChart";
-import { convertMapToArray } from "../utils/convertMapToArray";
+import React, { useEffect, useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { Row, Col, Table } from 'react-bootstrap';
+import PieChart from './charts/PieChart';
+import { convertMapToArray } from '../utils/convertMapToArray';
 
 const Analytics = ({ repoData }) => {
     const [analyticsData, setAnalyticsData] = useState([]),
@@ -24,10 +24,7 @@ const Analytics = ({ repoData }) => {
 
     useEffect(() => {
         const convertedData = convertMapToArray(extractLanguages());
-        setAnalyticsData((analyticsData) => [
-            ...analyticsData,
-            ...convertedData,
-        ]);
+        setAnalyticsData(analyticsData => [...analyticsData, ...convertedData]);
     }, [extractLanguages]);
 
     return (
@@ -73,7 +70,7 @@ const Analytics = ({ repoData }) => {
 };
 
 Analytics.propTypes = {
-    repoData: PropTypes.array.isRequired,
+    repoData: PropTypes.array.isRequired
 };
 
 export default Analytics;

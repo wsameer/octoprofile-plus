@@ -8,10 +8,10 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-  <Suspense fallback={''}>
-    <App />
-  </Suspense>,
-  document.getElementById('root')
+    <Suspense fallback={''}>
+        <App />
+    </Suspense>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

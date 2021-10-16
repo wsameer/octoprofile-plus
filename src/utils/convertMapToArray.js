@@ -1,4 +1,4 @@
-export const convertMapToArray = (data) => {
+export const convertMapToArray = data => {
     const result = [];
     [...data]
         .sort((a, b) => b[1] - a[1])

@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Col, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { Col, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const Home = () => {
     const history = useHistory(),
-        [userName, setUserName] = useState(""),
-        handleChange = (event) => setUserName(event.target.value),
-        handleSubmit = (event) => {
+        [userName, setUserName] = useState(''),
+        handleChange = event => setUserName(event.target.value),
+        handleSubmit = event => {
             event.preventDefault();
-            if (userName !== "") {
+            if (userName !== '') {
                 history.push({
                     pathname: `/${userName}`,
                     state: {
-                        id: userName,
-                    },
+                        id: userName
+                    }
                 });
             }
         };

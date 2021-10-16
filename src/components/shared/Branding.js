@@ -1,20 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const Branding = ({ hireable, collapse, toggleCollapse }) => {
     return (
         <div className="branding col-md">
             <Link to="/">
-                <img className="brand-logo" src="/github-plus.png" alt="brand-logo" />
+                <img
+                    className="brand-logo"
+                    src="/github-plus.png"
+                    alt="brand-logo"
+                />
             </Link>
 
             <div className="d-block d-sm-none float-right hireable ml-3">
                 <i
                     className={
-                        (collapse ? "fa fa-chevron-down" : "fa fa-chevron-up") +
-                        " green"
+                        (collapse ? 'fa fa-chevron-down' : 'fa fa-chevron-up') +
+                        ' green'
                     }
                     onClick={toggleCollapse}
                     aria-hidden="true"
@@ -36,7 +40,7 @@ const Branding = ({ hireable, collapse, toggleCollapse }) => {
                 <div className="hireable float-right">
                     <i
                         className={`fa fa-handshake-o ${
-                            hireable ? "green" : "red"
+                            hireable ? 'green' : 'red'
                         }`}
                         aria-hidden="true"
                     />
@@ -47,13 +51,13 @@ const Branding = ({ hireable, collapse, toggleCollapse }) => {
 };
 
 Branding.defaultProps = {
-    hireable: false,
+    hireable: false
 };
 
 Branding.propTypes = {
     hireable: PropTypes.bool,
     toggleCollapse: PropTypes.func,
-    collapse: PropTypes.bool.isRequired,
+    collapse: PropTypes.bool.isRequired
 };
 
 export default Branding;

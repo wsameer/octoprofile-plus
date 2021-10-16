@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { useHistory } from "react-router-dom";
-import { Col, Row, Tabs, Tab } from "react-bootstrap";
-import { Repositories, Analytics, Overview, Error } from "../components";
-import { Sidenav, ApiStatus, BusyIndicator } from "../components/shared";
+import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Col, Row, Tabs, Tab } from 'react-bootstrap';
+import { Repositories, Analytics, Overview, Error } from '../components';
+import { Sidenav, ApiStatus, BusyIndicator } from '../components/shared';
 
 // import { mockUserData, mockRepoData } from '../utils/mockdata';
 // const mockLimit = { limit: "60", remaining: "47", reset: "1591507162" };
 
 const HTTP_HEADERS = {
     headers: new Headers({
-        Accept: "application/vnd.github.mercy-preview+json",
-    }),
+        Accept: 'application/vnd.github.mercy-preview+json'
+    })
 };
 
-const Profile = (props) => {
+const Profile = props => {
     const history = useHistory();
     const LIMIT = 100;
     const userName = props.location.state.id;
@@ -30,20 +30,19 @@ const Profile = (props) => {
             HTTP_HEADERS
         );
 
-        // capture headers
         setApiRateLimit({
-            limit: response.headers.get("X-Ratelimit-Limit"),
-            remaining: response.headers.get("X-Ratelimit-Remaining"),
-            reset: response.headers.get("X-Ratelimit-Reset"),
+            limit: response.headers.get('X-Ratelimit-Limit'),
+            remaining: response.headers.get('X-Ratelimit-Remaining'),
+            reset: response.headers.get('X-Ratelimit-Reset')
         });
 
         if (response.status === 200) {
             response
                 .json()
-                .then((res) => {
+                .then(res => {
                     setRepoData(res);
                 })
-                .catch((err) => {
+                .catch(err => {
                     setError({ active: true, type: 400 });
                 });
         } else {
@@ -59,16 +58,16 @@ const Profile = (props) => {
 
         // capture headers
         setApiRateLimit({
-            limit: response.headers.get("X-Ratelimit-Limit"),
-            remaining: response.headers.get("X-Ratelimit-Remaining"),
-            reset: response.headers.get("X-Ratelimit-Reset"),
+            limit: response.headers.get('X-Ratelimit-Limit'),
+            remaining: response.headers.get('X-Ratelimit-Remaining'),
+            reset: response.headers.get('X-Ratelimit-Reset')
         });
 
         if (response.status === 200) {
             response
                 .json()
-                .then((res) => setUserData(res))
-                .catch((err) => {
+                .then(res => setUserData(res))
+                .catch(err => {
                     setError({ active: true, type: 400 });
                 });
         } else {
@@ -77,19 +76,21 @@ const Profile = (props) => {
     }, [setApiRateLimit, setError, userName]);
 
     const fetchApiStatus = useCallback(async () => {
-        const response = await fetch('https://www.githubstatus.com/api/v2/status.json');
+        const response = await fetch(
+            'https://www.githubstatus.com/api/v2/status.json'
+        );
 
         response
-          .json()
-          .then(({ status }) => setApiStatus(status))
-          .catch(err => {
-            setError({ active: true, type: response.status })
-            setApiStatus({
-                indicator: 'critical',
-                description: "Unable to get status"
-            })
-          });
-      }, [setApiStatus]);
+            .json()
+            .then(({ status }) => setApiStatus(status))
+            .catch(err => {
+                setError({ active: true, type: response.status });
+                setApiStatus({
+                    indicator: 'critical',
+                    description: 'Unable to get status'
+                });
+            });
+    }, [setApiStatus]);
 
     // Doesn't work due to CORS restrictions :(
     // async function fetchGitHubApiLimit() {
@@ -108,8 +109,8 @@ const Profile = (props) => {
     // }
 
     useEffect(() => {
-        if (userName === "") {
-            history.push("/");
+        if (userName === '') {
+            history.push('/');
         } else {
             // gives errors even in PROD too
             // if (process.env.NODE_ENV === 'production') {
@@ -146,7 +147,9 @@ const Profile = (props) => {
 
     return (
         <>
-            {apiRateLimit && apiStatus && <ApiStatus apiRateLimit={apiRateLimit} apiStatus={apiStatus} />}
+            {apiRateLimit && apiStatus && (
+                <ApiStatus apiRateLimit={apiRateLimit} apiStatus={apiStatus} />
+            )}
             <Col sm={3} className="sidenav">
                 <Sidenav userData={userData} />
             </Col>

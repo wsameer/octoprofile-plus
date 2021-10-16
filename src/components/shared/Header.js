@@ -1,5 +1,5 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 const Header = () => (
     <Row className="header d-block d-sm-none">
