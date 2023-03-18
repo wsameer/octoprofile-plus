@@ -49,16 +49,18 @@ const PersonalDetails = ({
                 <i className="fa fa-calendar pr-3" aria-hidden="true"></i>
                 <span>{formatDate(createdAt)}</span>
             </ListGroup.Item>
-            <ListGroupItem>
-                <i className="fa fa-twitter pr-3" aria-hidden="true"></i>
-                <a
-                    href={`https://twitter.com/${twitterUsername}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <span>{twitterUsername}</span>
-                </a>
-            </ListGroupItem>
+            {twitterUsername && (
+                <ListGroupItem>
+                    <i className="fa fa-twitter pr-3" aria-hidden="true"></i>
+                    <a
+                        href={`https://twitter.com/${twitterUsername}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span>{twitterUsername}</span>
+                    </a>
+                </ListGroupItem>
+            )}
         </ListGroup>
     );
 };

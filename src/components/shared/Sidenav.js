@@ -48,12 +48,12 @@ const Sidenav = ({ userData }) => {
                 />
 
                 <PersonalDetails
-                    createdAt={userData.created_at}
-                    email={userData.email}
-                    company={userData.company}
-                    blog={userData.blog}
-                    location={userData.location}
-                    twitterUsername={userData.twitter_username}
+                    createdAt={userData?.created_at}
+                    email={userData?.email}
+                    company={userData?.company}
+                    blog={userData?.blog}
+                    location={userData?.location}
+                    twitterUsername={userData?.twitter_username}
                 />
 
                 <hr />
