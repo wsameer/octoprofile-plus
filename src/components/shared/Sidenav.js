@@ -53,6 +53,7 @@ const Sidenav = ({ userData }) => {
                     company={userData.company}
                     blog={userData.blog}
                     location={userData.location}
+                    twitterUsername={userData.twitter_username}
                 />
 
                 <hr />

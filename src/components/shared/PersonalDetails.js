@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { formatDate } from '../../utils/commonfunctions';
 
-const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
+const PersonalDetails = ({
+    company,
+    location,
+    blog,
+    createdAt,
+    email,
+    twitterUsername
+}) => {
     return (
         <ListGroup variant="flush" className="personal-details">
             {company && (
@@ -42,6 +49,16 @@ const PersonalDetails = ({ company, location, blog, createdAt, email }) => {
                 <i className="fa fa-calendar pr-3" aria-hidden="true"></i>
                 <span>{formatDate(createdAt)}</span>
             </ListGroup.Item>
+            <ListGroupItem>
+                <i className="fa fa-twitter pr-3" aria-hidden="true"></i>
+                <a
+                    href={`https://twitter.com/${twitterUsername}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span>{twitterUsername}</span>
+                </a>
+            </ListGroupItem>
         </ListGroup>
     );
 };
@@ -51,7 +68,8 @@ PersonalDetails.propTypes = {
     location: PropTypes.string.isRequired,
     company: PropTypes.string,
     blog: PropTypes.string.isRequired,
-    email: PropTypes.string
+    email: PropTypes.string,
+    twitterUsername: PropTypes.string
 };
 
 export default PersonalDetails;
